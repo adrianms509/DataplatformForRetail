@@ -1,7 +1,7 @@
 # Fabric
 
 ## Setup
-1. Create a new Workspace and sync the Workspace folder into it.
+1. Create a new Workspace and sync the Workspace folder into it. Ensure that you set the Git Folder to "Fabric/Workspace"
 2. Create a service principal and an Azure Key vault
 3. Create the following secrets in the Keyvault:
 - "aad-tenant-id": Directory (tenant) ID
