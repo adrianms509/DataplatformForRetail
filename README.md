@@ -19,3 +19,41 @@ The demo consists of three parts:
 To setup the demo for yourself, please request a teannt with CoPilotStudio licenses and at least one Azure Subscriptions or enable PAYGO billing for CoPilotStudio. Then follow the README.md files in the respective directories.
 
 ## Running the demo
+
+### CoPilot Studio / Data Agent Prompts
+
+In CoPilot Studio:
+```
+What is the product P0023 made of?
+```
+
+```
+What other products do customers buy with this?
+```
+
+In the Data Agent Overview (optional):
+```
+How many jackets made of Polyester-Jacquard material are there in Cologne, broken down by size?
+```
+
+### CoPilot in PowerBI
+
+Open the Sales Report in Edit more, paste this in CoPilot:
+
+```
+Create a sales performance dashboard with the following visuals: Total revenue and total orders as sums
+a line chart of the average order value (AOV) by date
+a bar chart of the sum of revenue by region and channel
+a bar chart of sum of revenue by brand as well as a bar chart of sum of revenue per category
+```
+
+In the general Copilot for PowerBI:
+
+```
+how many purchases where made in december with a basket size larger than 3?
+```
+
+### Virtual Try On + RTI
+1. Show the Virtual Try On
+2. Show the Eventstream and quickly explain how data is transformed on the fly
+3. Show the Realtime-Dashboard + Create an Activator to identify viral combinations
