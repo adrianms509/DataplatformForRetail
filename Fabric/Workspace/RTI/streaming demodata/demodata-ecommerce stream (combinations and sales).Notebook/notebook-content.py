@@ -30,23 +30,16 @@ from azure.eventhub import EventHubProducerClient, EventData
 import json, random, time, datetime as dt
 
 # 1) Read secrets from Key Vault via the Fabric connection
-KV_CONN = "YOUR Keyvault URI here"
+KV_CONN = "YOUR KEYVAULT CONNECTION URI HERE"
 TENANT_ID    = mssparkutils.credentials.getSecret(KV_CONN, "aad-tenant-id")
 CLIENT_ID    = mssparkutils.credentials.getSecret(KV_CONN, "aad-client-id")
 CLIENT_SECRET = mssparkutils.credentials.getSecret(KV_CONN, "aad-client-secret")
 
-
 ES_FQDN_SALES = mssparkutils.credentials.getSecret(KV_CONN, "es-fqdn-sales")
-ES_FQDN_SALES   = "esehamr9dzvlkih3dhx60r.servicebus.windows.net"
-
 ES_NAME_SALES = mssparkutils.credentials.getSecret(KV_CONN, "es-name-sales")
-ES_NAME_SALES   = "es_45b12718-d13f-49ec-96b6-362462708467"       
 
 ES_FQDN_COMBINATIONS = mssparkutils.credentials.getSecret(KV_CONN, "es-fqdn-combinations")
-ES_FQDN_COMBINATIONS   = "eseham25vehxkq6o8mvgv4.servicebus.windows.net"  
-
 ES_NAME_COMBINATIONS = mssparkutils.credentials.getSecret(KV_CONN, "es-name-combinations")
-ES_NAME_COMBINATIONS   = "es_7cf522f0-22a1-46c9-8c76-c6526cc7fb96"    
 
 # 2) Create an AAD credential for the SP
 cred = ClientSecretCredential(tenant_id=TENANT_ID, client_id=CLIENT_ID, client_secret=CLIENT_SECRET)
