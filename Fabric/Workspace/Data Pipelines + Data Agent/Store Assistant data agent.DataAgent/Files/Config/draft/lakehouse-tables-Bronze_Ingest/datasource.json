@@ -1,0 +1,255 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json",
+  "artifactId": "8c1bc565-8b2d-b3b2-4fdd-beed5b73579d",
+  "workspaceId": "00000000-0000-0000-0000-000000000000",
+  "dataSourceInstructions": "Bronze_Ingest Instructions\r\n\r\nName & Entity Resolution:\r\n- Prefer product_id when the user provides it.\r\n- If a product name is provided:\r\n    • Resolve via case‑insensitive match on products.name.\r\n    • If multiple partial matches exist, return up to 5 (product_id, name)\r\n      and ask the user to choose.\r\n\r\nInventory / Stock:\r\n- Default location = 'Cologne' unless user specifies another.\r\n- If size is not specified for “how many in stock,” aggregate sum(amount)\r\n  across all sizes.\r\n- For “stock by size,” return each size with amounts.\r\n    • Numeric sizes: order ascending.\r\n    • Alpha sizes: XS → S → M → L → XL → XXL.\r\n- If no inventory rows exist for product/location/size, return 0.\r\n- Do NOT infer inventory from orders—use only product_inventory.\r\n\r\nProduct Attributes:\r\n- For attributes (color, material, base_price, name):\r\n    • Use Bronze_Ingest.products only.\r\n- Return only requested columns, plus product_id and name for clarity.",
+  "displayName": "Bronze_Ingest",
+  "type": "lakehouse_tables",
+  "userDescription": "Bronze_Ingest Data Sources (Descriptions)\r\n\r\nTables:\r\n\r\n1) products\r\n   Purpose:\r\n     - Master product data and attributes.\r\n   Columns:\r\n     - product_id STRING\r\n     - name STRING\r\n     - material STRING\r\n     - base_price DOUBLE\r\n     - color STRING\r\n\r\n2) product_inventory\r\n   Purpose:\r\n     - Inventory by product, store/location, and size.\r\n   Columns:\r\n     - product_id STRING\r\n     - location STRING\r\n     - size STRING\r\n     - amount INT",
+  "metadata": {},
+  "elements": [
+    {
+      "id": "dc61b50d-b7b4-4537-9ab7-1916251cf2aa",
+      "is_selected": false,
+      "display_name": "dbo",
+      "type": "lakehouse_tables.schema",
+      "description": null,
+      "children": [
+        {
+          "id": "e29aa3f5-4e7a-4c46-ae4b-556770db9a97",
+          "is_selected": false,
+          "display_name": "order_items",
+          "type": "lakehouse_tables.table",
+          "description": null,
+          "children": [
+            {
+              "id": "8205a61f-5022-4894-8ba2-d3a6d6459249",
+              "is_selected": true,
+              "display_name": "amount",
+              "type": "lakehouse_tables.column",
+              "data_type": "int",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "aaaeb74d-dd97-4728-8cdb-8adf0cf8e45d",
+              "is_selected": true,
+              "display_name": "color",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "aebe7c7e-3bc4-45a7-92e1-6ebf8bc39860",
+              "is_selected": true,
+              "display_name": "order_id",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "1b3db035-26d3-4590-83a3-69cc935f7021",
+              "is_selected": true,
+              "display_name": "product_id",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "c6502d43-ddbd-495b-a3ca-252ffa30beec",
+          "is_selected": false,
+          "display_name": "orders",
+          "type": "lakehouse_tables.table",
+          "description": null,
+          "children": [
+            {
+              "id": "d507be2e-ff9a-4e0c-9d4e-50f7f9a7219c",
+              "is_selected": true,
+              "display_name": "location",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "e1c2d84d-70c6-4178-8c39-e40c1659730b",
+              "is_selected": true,
+              "display_name": "order_id",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "1f93c2fd-f13d-4d6f-ac0e-0ab3b3a2a11c",
+              "is_selected": true,
+              "display_name": "promo_code",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "66c12be1-466e-4a46-8c5f-a6ef9a5ab213",
+              "is_selected": true,
+              "display_name": "promo_flag",
+              "type": "lakehouse_tables.column",
+              "data_type": "bit",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "58c3d8bc-0a60-4141-b347-1410178627fc",
+              "is_selected": true,
+              "display_name": "user_id",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "58969881-2ed8-4d00-84b4-450b8fba3b51",
+          "is_selected": false,
+          "display_name": "product_categories",
+          "type": "lakehouse_tables.table",
+          "description": null,
+          "children": [
+            {
+              "id": "6ae2a1af-e852-4a8d-a786-c6ad6181684d",
+              "is_selected": true,
+              "display_name": "category",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "3194b78d-9ec7-410a-b3e6-7617621cb2aa",
+              "is_selected": true,
+              "display_name": "product_id",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "e71b16d6-de0c-41bf-b682-abb33eb92ed0",
+          "is_selected": true,
+          "display_name": "product_inventory",
+          "type": "lakehouse_tables.table",
+          "description": null,
+          "children": [
+            {
+              "id": "a56edc84-11c0-4689-880e-b5b340858a46",
+              "is_selected": true,
+              "display_name": "amount",
+              "type": "lakehouse_tables.column",
+              "data_type": "int",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "0a5f534e-0e91-4cfb-885f-9acc8f214ce8",
+              "is_selected": true,
+              "display_name": "location",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "558103db-b042-4b53-a0be-d8dc0795a018",
+              "is_selected": true,
+              "display_name": "product_id",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "9cde7361-c84b-430c-aa56-04807a2bbf8c",
+              "is_selected": true,
+              "display_name": "size",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "643baac3-571f-4f1d-8890-98508a80eaef",
+          "is_selected": true,
+          "display_name": "products",
+          "type": "lakehouse_tables.table",
+          "description": null,
+          "children": [
+            {
+              "id": "9f9e2538-6ebb-4a82-9b89-4e6b09422dcb",
+              "is_selected": true,
+              "display_name": "base_price",
+              "type": "lakehouse_tables.column",
+              "data_type": "float",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "aae88a3f-aece-4d5c-9b93-28ebf0d38ed5",
+              "is_selected": true,
+              "display_name": "brand",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "b8a0b9ce-9206-41d7-9554-d9be042bbb22",
+              "is_selected": true,
+              "display_name": "color",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "294fa65d-7e40-4a1c-a951-2b141bfe2e6d",
+              "is_selected": true,
+              "display_name": "material",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "35b55cf3-ba5e-4066-8c2f-23f64775dd1a",
+              "is_selected": true,
+              "display_name": "name",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            },
+            {
+              "id": "5ebc6093-22f2-4208-8f83-452de12bc5d4",
+              "is_selected": true,
+              "display_name": "product_id",
+              "type": "lakehouse_tables.column",
+              "data_type": "varchar",
+              "description": null,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

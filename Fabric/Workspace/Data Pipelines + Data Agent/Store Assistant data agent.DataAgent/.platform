@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "DataAgent",
+    "displayName": "Store Assistant data agent",
+    "description": "Agent helps you to answer questions about products, stock levels and frequently bought combinations"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a131aa2a-61d3-8988-4f1b-d34bce62b651"
+  }
+}

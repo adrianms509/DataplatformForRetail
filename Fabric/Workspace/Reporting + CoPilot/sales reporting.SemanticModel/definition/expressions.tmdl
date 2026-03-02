@@ -1,0 +1,20 @@
+expression 'DirectLake - Silver_Model' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/0b45d13d-cfda-4a6b-a6b7-a712c6d98204/4729f13e-b56f-447a-a933-80a01e64e6cd", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 651dcbe4-39b7-43e9-81cd-713dedc0691d
+
+	annotation PBI_IncludeFutureArtifacts = False
+
+	annotation PBI_RemovedChildren = [{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[kx_total_baskets]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[fact_basket_product]"}},"objectType":"Table"},{"remoteItemId":{"analysisServicesObject":{"sourceName":null,"sourceLineageTag":"[dbo].[fact_product_counts]"}},"objectType":"Table"}]
+
+expression 'DirectLake - Gold_Consume' =
+		let
+		    Source = AzureStorage.DataLake("https://onelake.dfs.fabric.microsoft.com/0b45d13d-cfda-4a6b-a6b7-a712c6d98204/5f6bb600-4dbb-4333-94af-85a72d865a64", [HierarchicalNavigation=true])
+		in
+		    Source
+	lineageTag: 36dd94dc-d372-4675-941c-bfd4baa7cf80
+
+	annotation PBI_IncludeFutureArtifacts = False
+

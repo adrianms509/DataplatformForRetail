@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLDashboard",
+    "displayName": "eCommerce Overview",
+    "description": "eCommerce Overview"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "467348f5-9470-8fff-4df4-1d3152a62e14"
+  }
+}

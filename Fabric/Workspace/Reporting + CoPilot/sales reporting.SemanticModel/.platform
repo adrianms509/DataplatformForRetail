@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "sales reporting",
+    "description": "This semantic model provides an end‑to‑end view of retail sales performance and customer purchasing behavior, combining basket‑level and item‑level facts with shared business dimensions for time, product, and store. It enables analysis of revenue, units sold, order behavior, and promotional effectiveness across regions, channels, categories, and brands.\nThe model supports both strategic KPIs (Orders, Revenue, AOV, promotion impact) and detailed drill‑downs (product, brand, and item‑level sales)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "eea672cd-e1f0-9d12-4b2a-96cf38d6bd7f"
+  }
+}

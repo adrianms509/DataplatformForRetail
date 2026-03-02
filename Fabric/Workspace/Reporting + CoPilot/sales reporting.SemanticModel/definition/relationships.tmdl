@@ -1,0 +1,16 @@
+relationship feba8ca1-bd75-9faa-f13d-b6eaa5a24183
+	fromColumn: fact_sales_item.product_id
+	toColumn: dim_product.product_id
+
+relationship f8b0b7e6-ec93-4b6f-21e0-6d2b4d7a8232
+	fromColumn: fact_basket_summary.store_id
+	toColumn: dim_store.store_id
+
+relationship e746492d-73c7-41fe-80f3-25bb44f9270f
+	fromColumn: fact_basket_summary.order_date
+	toColumn: dim_date.date
+
+relationship 5c4db547-4a3d-5318-b88a-ca7393b4b566
+	fromColumn: fact_sales_item.order_id
+	toColumn: fact_basket_summary.order_id
+

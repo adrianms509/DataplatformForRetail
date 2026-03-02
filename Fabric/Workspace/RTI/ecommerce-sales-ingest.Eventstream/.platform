@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Eventstream",
+    "displayName": "ecommerce-sales-ingest"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "3f525751-5eba-b0d9-4268-0e234fe0e77e"
+  }
+}

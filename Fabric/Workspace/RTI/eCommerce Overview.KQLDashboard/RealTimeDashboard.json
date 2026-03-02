@@ -1,0 +1,457 @@
+{
+  "schema_version": 67,
+  "autoRefresh": {
+    "enabled": true,
+    "minInterval": "1s"
+  },
+  "tiles": [
+    {
+      "id": "6a5464b1-e042-496d-96fa-d66497c3933e",
+      "queryRef": {
+        "kind": "query",
+        "queryId": "ef4a4cc1-96eb-4fce-ad46-9770bc861247"
+      },
+      "title": "#Items sold (60 mins)",
+      "visualType": "card",
+      "pageId": "64ddcfd1-978f-45ee-952b-f9ebaac8a27b",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 3,
+        "height": 4
+      },
+      "visualOptions": {
+        "multiStat__textSize": "auto",
+        "multiStat__valueColumn": null,
+        "colorRulesDisabled": false,
+        "colorRules": []
+      }
+    },
+    {
+      "id": "cac5915a-4f3a-419d-b8f0-de042774fa5d",
+      "title": "Revenue (last 60 min)",
+      "visualType": "card",
+      "pageId": "64ddcfd1-978f-45ee-952b-f9ebaac8a27b",
+      "layout": {
+        "x": 3,
+        "y": 0,
+        "width": 3,
+        "height": 4
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "a65509ba-0ddf-45e9-93b8-fa7540a2a70b"
+      },
+      "visualOptions": {
+        "multiStat__textSize": "auto",
+        "multiStat__valueColumn": null,
+        "colorRulesDisabled": true,
+        "colorRules": []
+      }
+    },
+    {
+      "id": "f5a3ff3c-f9df-4f58-a548-e4eebe897d47",
+      "title": " Orders Count per Minute",
+      "visualType": "line",
+      "pageId": "64ddcfd1-978f-45ee-952b-f9ebaac8a27b",
+      "layout": {
+        "x": 0,
+        "y": 4,
+        "width": 6,
+        "height": 5
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "034d46e2-14d4-45f6-a6a6-85ad586b8803"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "forceAxisTicks": false,
+        "crossFilter": [],
+        "drillthrough": []
+      }
+    },
+    {
+      "id": "48b5e24a-ee3f-454c-af27-257f8918ce93",
+      "title": "Average Order Value",
+      "visualType": "line",
+      "pageId": "64ddcfd1-978f-45ee-952b-f9ebaac8a27b",
+      "layout": {
+        "x": 6,
+        "y": 0,
+        "width": 9,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "dc424ec8-7d5d-477d-a04c-3ac8b83dd53f"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "forceAxisTicks": false,
+        "crossFilter": [],
+        "drillthrough": []
+      }
+    },
+    {
+      "id": "e806a98e-60c8-4ded-b3f2-dc38942cb23b",
+      "title": "Promo Usage %",
+      "visualType": "line",
+      "pageId": "64ddcfd1-978f-45ee-952b-f9ebaac8a27b",
+      "layout": {
+        "x": 6,
+        "y": 7,
+        "width": 9,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "cd5adb20-4a02-4271-8d27-2f8c552662f2"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "forceAxisTicks": false,
+        "crossFilter": [],
+        "drillthrough": []
+      }
+    },
+    {
+      "id": "46373510-64b7-47f0-9b98-ffbe0fb5df24",
+      "title": "Combinations to Orders Rate",
+      "visualType": "line",
+      "pageId": "64ddcfd1-978f-45ee-952b-f9ebaac8a27b",
+      "layout": {
+        "x": 0,
+        "y": 9,
+        "width": 6,
+        "height": 5
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "e4a0468c-0392-4a95-afc7-f08860a75a80"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": []
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": null,
+        "yColumns": null,
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "forceAxisTicks": false,
+        "crossFilter": [],
+        "drillthrough": []
+      }
+    },
+    {
+      "id": "bc3e4b72-a93e-49ce-a359-93526a415317",
+      "title": "Viral Combinations (not yet featured)",
+      "visualType": "table",
+      "pageId": "43bbcdbd-4e03-4b3c-b62c-362047bd570b",
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 9,
+        "height": 7
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "ece07697-f860-4ca4-bb85-50a329fe266f"
+      },
+      "visualOptions": {
+        "table__enableRenderLinks": true,
+        "colorRulesDisabled": true,
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "crossFilter": [],
+        "drillthrough": [],
+        "table__renderLinks": [],
+        "colorRules": []
+      }
+    },
+    {
+      "id": "981caa4c-a1ad-4a12-9ffe-37b0246d9aa6",
+      "title": "Combination with most sales",
+      "visualType": "multistat",
+      "pageId": "43bbcdbd-4e03-4b3c-b62c-362047bd570b",
+      "layout": {
+        "x": 5,
+        "y": 7,
+        "width": 4,
+        "height": 4
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "547615d8-9a0a-4d10-9ecd-adaadd7911cd"
+      },
+      "visualOptions": {
+        "multiStat__textSize": "auto",
+        "multiStat__valueColumn": null,
+        "colorRulesDisabled": true,
+        "multiStat__displayOrientation": "horizontal",
+        "multiStat__labelColumn": "Pair_Key",
+        "multiStat__slot": {
+          "width": 1,
+          "height": 1
+        },
+        "colorRules": []
+      }
+    },
+    {
+      "id": "1d9d5094-ab09-4828-bbca-bceecc41fc03",
+      "title": "Top 3 viral Combinations",
+      "visualType": "line",
+      "pageId": "43bbcdbd-4e03-4b3c-b62c-362047bd570b",
+      "layout": {
+        "x": 9,
+        "y": 0,
+        "width": 15,
+        "height": 11
+      },
+      "queryRef": {
+        "kind": "query",
+        "queryId": "da667bda-8c7f-4d03-8466-d20fea087eaa"
+      },
+      "visualOptions": {
+        "multipleYAxes": {
+          "base": {
+            "id": "-1",
+            "label": "",
+            "columns": [],
+            "yAxisMaximumValue": null,
+            "yAxisMinimumValue": null,
+            "yAxisScale": "linear",
+            "horizontalLines": [
+              {
+                "id": "423df7ba-53c9-4d76-9e24-47eae16118bc",
+                "value": null
+              }
+            ]
+          },
+          "additional": [],
+          "showMultiplePanels": false
+        },
+        "hideLegend": false,
+        "legendLocation": "bottom",
+        "xColumnTitle": "",
+        "xColumn": "event_time",
+        "yColumns": [
+          "Cum"
+        ],
+        "seriesColumns": null,
+        "xAxisScale": "linear",
+        "verticalLine": "",
+        "crossFilter": [],
+        "crossFilterDisabled": false,
+        "drillthroughDisabled": false,
+        "forceAxisTicks": false,
+        "drillthrough": []
+      }
+    }
+  ],
+  "baseQueries": [],
+  "parameters": [
+    {
+      "kind": "duration",
+      "id": "7ffa21d4-9e92-442c-97f0-e90e0de1bc34",
+      "displayName": "Time range",
+      "description": "",
+      "beginVariableName": "_startTime",
+      "endVariableName": "_endTime",
+      "defaultValue": {
+        "kind": "dynamic",
+        "count": 1,
+        "unit": "hours"
+      },
+      "showOnPages": {
+        "kind": "all"
+      }
+    }
+  ],
+  "dataSources": [
+    {
+      "id": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8",
+      "kind": "kusto-trident",
+      "clusterUri": "",
+      "database": "1185b7a1-d75c-9392-432a-c97ad85ecc7c",
+      "name": "ecommerce-sales",
+      "scopeId": "kusto-trident",
+      "workspace": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "pages": [
+    {
+      "name": "Live Sales Pulse",
+      "id": "64ddcfd1-978f-45ee-952b-f9ebaac8a27b"
+    },
+    {
+      "name": "Trending Combinations",
+      "id": "43bbcdbd-4e03-4b3c-b62c-362047bd570b"
+    }
+  ],
+  "queries": [
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "\r\nlet timeRange = 1h;\r\nlet startTime = now() - timeRange;\r\n\r\norder_items\r\n| join kind=inner (orders | where event_time between (startTime .. now()) | project order_id)\r\n    on order_id\r\n| summarize items_sold = sum(quantity)\r\n",
+      "id": "ef4a4cc1-96eb-4fce-ad46-9770bc861247",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "orders\n| where event_time >= now() - 1h\n| summarize Revenue = sum(total_price)",
+      "id": "a65509ba-0ddf-45e9-93b8-fa7540a2a70b",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "\nlet startTime = now() - 60m;\norders\n| where event_time between (startTime .. now())\n| summarize Orders = count() by bin(event_time, 1m)\n| order by event_time asc\n",
+      "id": "034d46e2-14d4-45f6-a6a6-85ad586b8803",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "let startTime = now() - 60m;\norders\n| where event_time between (startTime .. now())\n| summarize rev = sum(total_price), cnt = count() by bin(event_time, 1m)\n| extend AOV = iff(cnt == 0, real(0), rev / cnt)\n| project event_time, AOV\n| order by event_time asc",
+      "id": "dc424ec8-7d5d-477d-a04c-3ac8b83dd53f",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "let startTime = now() - 60m;\norders\n| where event_time between (startTime .. now())\n| summarize total = count(), with_promo = countif(isnotempty(promo_code)) by bin(event_time, 1m)\n| extend Promo_Usage_Pct = iff(total == 0, real(0), 100.0 * with_promo / total)\n| project event_time, Promo_Usage_Pct\n| order by event_time asc",
+      "id": "cd5adb20-4a02-4271-8d27-2f8c552662f2",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "let startTime = now() - 60m;\norders\n| where event_time between (startTime .. now())\n| summarize total_orders = count(),\n            combo_orders = countif(isnotempty(combination_id))\n          by t = bin(event_time, 1m)\n| extend Conversion_Pct = iif(total_orders == 0, real(0), 100.0 * todouble(combo_orders) / todouble(total_orders))\n| project event_time = t, total_orders, combo_orders, Conversion_Pct\n| order by event_time asc",
+      "id": "e4a0468c-0392-4a95-afc7-f08860a75a80",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "// Please enter your KQL query (Example):\n// <table name>\n// | where <datetime column> between (['_startTime'] .. ['_endTime']) // Time range filtering\n// | take 100\n// --- Top Product Pairs inside Sold Combinations (robust) ---\nlet timeRange = 1h;\nlet startTime = now() - timeRange;\n\n// Combinations that had at least one order in the window\nlet SoldCombos =\n    orders\n    | where event_time between (startTime .. now())\n    | where isnotempty(combination_id)\n    | summarize by combination_id;\n\n// Build UNIQUE product list per sold combination (drop null/empty product_id)\nlet ItemsPerCombo =\n    combination_items\n    | where isnotempty(product_id)\n    | join kind=inner SoldCombos on combination_id\n    | summarize products = make_set(tostring(product_id)) by combination_id;\n\n// Create unordered pairs (i1 < i2) within each combination, then count them\nItemsPerCombo\n| mv-expand with_itemindex=i1 p1 = products to typeof(string)\n| mv-expand with_itemindex=i2 p2 = products to typeof(string)\n| where i1 < i2\n| summarize Pair_Count = count() by Product_A = p1, Product_B = p2\n| top 20 by Pair_Count desc",
+      "id": "ece07697-f860-4ca4-bb85-50a329fe266f",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "\n// --- Top 1 Product Pair inside Sold Combinations (with joined ID string) ---\nlet timeRange = 1h;\nlet startTime = now() - timeRange;\n\n// Combinations that had at least one order in the window\nlet SoldCombos =\n    orders\n    | where event_time between (startTime .. now())\n    | where isnotempty(combination_id)\n    | summarize by combination_id;\n\n// Build UNIQUE product list per sold combination (drop null/empty product_id)\nlet ItemsPerCombo =\n    combination_items\n    | where isnotempty(product_id)\n    | join kind=inner SoldCombos on combination_id\n    | summarize products = make_set(tostring(product_id)) by combination_id;\n\n// Create unordered pairs (i1 < i2) within each combination, then count them\nItemsPerCombo\n| mv-expand with_itemindex=i1 p1 = products to typeof(string)\n| mv-expand with_itemindex=i2 p2 = products to typeof(string)\n| where i1 < i2\n| summarize Pair_Count = count() by Product_A = p1, Product_B = p2\n| top 1 by Pair_Count desc\n| extend Pair_Key = strcat(Product_A, \" × \", Product_B)   // <-- joined string for Multi-Stat\n| project Pair_Key, Product_A, Product_B, Pair_Count\n",
+      "id": "547615d8-9a0a-4d10-9ecd-adaadd7911cd",
+      "usedVariables": []
+    },
+    {
+      "dataSource": {
+        "kind": "inline",
+        "dataSourceId": "ddfc351e-137f-4ecd-b2ab-e19ec0c57ac8"
+      },
+      "text": "// ===== Top 3 Product Pairs — CUMULATIVE Distinct Combinations per Minute (last hour) =====\n\n// Parameters\nlet timeRange = 1h;\nlet startTime = now() - timeRange;\nlet step = 1m;\n\n// Orders in window\nlet SoldOrders =\n    orders\n    | where event_time between (startTime .. now())\n    | where isnotempty(combination_id)\n    | project combination_id, event_time;\n\n// Product sets per combination (static by combination_id)\nlet ItemsPerCombo =\n    combination_items\n    | where isnotempty(product_id)\n    | summarize products = make_set(tostring(product_id)) by combination_id;\n\n// All unordered pairs per combination\nlet PairsPerCombo =\n    ItemsPerCombo\n    | mv-expand with_itemindex=i1 p1 = products to typeof(string)\n    | mv-expand with_itemindex=i2 p2 = products to typeof(string)\n    | where i1 < i2\n    | project combination_id, Product_A = p1, Product_B = p2, Pair_Key = strcat(p1, \" × \", p2);\n\n// Top 3 pairs in the last hour by distinct combinations that had ≥1 order\nlet TopPairs =\n    PairsPerCombo\n    | join kind=inner (SoldOrders | summarize by combination_id) on combination_id\n    | summarize Pair_ComboCount = dcount(combination_id) by Product_A, Product_B\n    | top 3 by Pair_ComboCount desc\n    | extend Pair_Key = strcat(Product_A, \" × \", Product_B)\n    | project Pair_Key, Product_A, Product_B;\n\n// Build a continuous per-minute series using make-series (non-cumulative)\nlet PerMinuteSeries =\n    SoldOrders\n    | join kind=inner PairsPerCombo on combination_id\n    | join kind=inner TopPairs on Product_A, Product_B\n    | make-series Combinations = dcount(combination_id) default=0\n        on event_time from startTime to now() step step\n        by Pair_Key;\n\n// Convert to cumulative by expanding the arrays and taking row-wise cumsum per pair\nPerMinuteSeries\n| mv-apply ts = event_time to typeof(datetime), v = Combinations to typeof(long) on (\n    order by ts asc\n    | serialize\n    | extend Cum = row_cumsum(v)\n    | project event_time = ts, Pair_Key, Cum\n)\n| render timechart with (\n    title = \"Top 3 Product Pairs – CUMULATIVE Distinct Combinations per Minute (Last Hour)\"\n)",
+      "id": "da667bda-8c7f-4d03-8466-d20fea087eaa",
+      "usedVariables": []
+    }
+  ]
+}

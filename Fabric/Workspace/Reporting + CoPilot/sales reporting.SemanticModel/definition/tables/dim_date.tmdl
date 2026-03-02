@@ -1,0 +1,80 @@
+table dim_date
+	lineageTag: 8ef7f4e6-d79c-4a2a-b21d-b03d0f10459c
+	sourceLineageTag: [dbo].[dim_date]
+
+	column date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: c1b45510-d3bf-4811-82c2-0741d5b3e526
+		sourceLineageTag: date
+		summarizeBy: none
+		sourceColumn: date
+
+		annotation SummarizationSetBy = Automatic
+
+	column date_key
+		dataType: int64
+		formatString: 0
+		lineageTag: 614f6a3e-e271-4d6c-8882-a009bfb7aadd
+		sourceLineageTag: date_key
+		summarizeBy: none
+		sourceColumn: date_key
+
+		annotation SummarizationSetBy = Automatic
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: c6bf5cb4-83dc-4366-a62e-452eb12d67d1
+		sourceLineageTag: year
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: ae6407ea-139b-4d07-9033-995441802e9c
+		sourceLineageTag: quarter
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 093c8604-c413-427d-8ade-f888c1d9680a
+		sourceLineageTag: month
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column day
+		dataType: int64
+		formatString: 0
+		lineageTag: a0a41965-c22d-45a8-a445-8543bf219bb5
+		sourceLineageTag: day
+		summarizeBy: none
+		sourceColumn: day
+
+		annotation SummarizationSetBy = Automatic
+
+	column day_of_week
+		dataType: string
+		lineageTag: 6e053deb-7492-4797-81a5-807a7960902c
+		sourceLineageTag: day_of_week
+		summarizeBy: none
+		sourceColumn: day_of_week
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_date = entity
+		mode: directLake
+		source
+			entityName: dim_date
+			schemaName: dbo
+			expressionSource: 'DirectLake - Silver_Model'
+

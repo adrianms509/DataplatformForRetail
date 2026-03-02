@@ -1,0 +1,67 @@
+table dim_product
+	lineageTag: d9ca74e6-4cbb-4794-8ebb-ebb4ba7d3cb2
+	sourceLineageTag: [dbo].[dim_product]
+
+	column product_id
+		dataType: string
+		lineageTag: ae93d17f-8157-4ac7-95bf-e179f5c1a956
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: e39b4e57-2934-4399-b7db-e01603a7eed2
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: a6f63beb-0235-420e-90ad-ca6422debae1
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 8eedf482-5f0a-4bfa-bf3e-2981c338dc8c
+		sourceLineageTag: brand
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_active
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: feb60280-38a2-442c-90c4-9be846f8d4e2
+		sourceLineageTag: is_active
+		summarizeBy: none
+		sourceColumn: is_active
+
+		annotation SummarizationSetBy = Automatic
+
+	column effective_ts
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: aba84294-407f-4b72-ab4e-7369bdb942c7
+		sourceLineageTag: effective_ts
+		summarizeBy: none
+		sourceColumn: effective_ts
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_product = entity
+		mode: directLake
+		source
+			entityName: dim_product
+			schemaName: dbo
+			expressionSource: 'DirectLake - Silver_Model'
+

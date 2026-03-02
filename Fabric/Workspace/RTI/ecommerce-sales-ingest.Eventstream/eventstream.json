@@ -1,0 +1,579 @@
+{
+  "sources": [
+    {
+      "id": "9a6b7f56-70f9-49aa-b7f4-c02ebc814604",
+      "name": "CustomEndpoint-Source",
+      "type": "CustomEndpoint",
+      "properties": {}
+    }
+  ],
+  "destinations": [
+    {
+      "id": "013b1463-c552-47f9-9346-8fb9e2b78691",
+      "name": "Orders",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "ProcessedIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "1185b7a1-d75c-9392-432a-c97ad85ecc7c",
+        "databaseName": "ecommerce-sales",
+        "tableName": "orders",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "ecommerce-sales-ingest-stream"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "ecommerce-sales-ingest-stream",
+          "schema": {
+            "columns": [
+              {
+                "name": "event_type",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "event_time",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "order_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "combination_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "user",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "is_community_created",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "promo_code",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "discount",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "total_price",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "items",
+                "type": "Array",
+                "fields": null,
+                "items": {
+                  "name": null,
+                  "type": "Record",
+                  "fields": [
+                    {
+                      "name": "product_id",
+                      "type": "Record",
+                      "fields": [],
+                      "items": null
+                    },
+                    {
+                      "name": "color",
+                      "type": "Nvarchar(max)",
+                      "fields": null,
+                      "items": null
+                    },
+                    {
+                      "name": "size",
+                      "type": "Nvarchar(max)",
+                      "fields": null,
+                      "items": null
+                    },
+                    {
+                      "name": "quantity",
+                      "type": "BigInt",
+                      "fields": null,
+                      "items": null
+                    },
+                    {
+                      "name": "price",
+                      "type": "Float",
+                      "fields": null,
+                      "items": null
+                    }
+                  ],
+                  "items": null
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "4c455cbc-c273-4abf-a79f-e28716b22bde",
+      "name": "Eventhouse",
+      "type": "Eventhouse",
+      "properties": {
+        "dataIngestionMode": "ProcessedIngestion",
+        "workspaceId": "00000000-0000-0000-0000-000000000000",
+        "itemId": "1185b7a1-d75c-9392-432a-c97ad85ecc7c",
+        "databaseName": "ecommerce-sales",
+        "tableName": "order_items",
+        "inputSerialization": {
+          "type": "Json",
+          "properties": {
+            "encoding": "UTF8"
+          }
+        }
+      },
+      "inputNodes": [
+        {
+          "name": "ManageFields"
+        }
+      ],
+      "inputSchemas": [
+        {
+          "name": "ManageFields",
+          "schema": {
+            "columns": [
+              {
+                "name": "product_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "color",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "size",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "quantity",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "price",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "order_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "item_index",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "streams": [
+    {
+      "id": "e9a98b09-4f01-45d7-b9c1-c0fe30b48259",
+      "name": "ecommerce-sales-ingest-stream",
+      "type": "DefaultStream",
+      "properties": {},
+      "inputNodes": [
+        {
+          "name": "CustomEndpoint-Source"
+        }
+      ]
+    }
+  ],
+  "operators": [
+    {
+      "name": "ExpandItems",
+      "type": "Expand",
+      "inputNodes": [
+        {
+          "name": "ecommerce-sales-ingest-stream"
+        }
+      ],
+      "properties": {
+        "column": {
+          "expressionType": "ColumnReference",
+          "node": null,
+          "columnName": "items",
+          "columnPathSegments": []
+        },
+        "ignoreMissingOrEmpty": true
+      },
+      "inputSchemas": [
+        {
+          "name": "ecommerce-sales-ingest-stream",
+          "schema": {
+            "columns": [
+              {
+                "name": "event_type",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "event_time",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "order_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "combination_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "user",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "is_community_created",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "promo_code",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "discount",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "total_price",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "items",
+                "type": "Array",
+                "fields": null,
+                "items": {
+                  "name": null,
+                  "type": "Record",
+                  "fields": [
+                    {
+                      "name": "product_id",
+                      "type": "Record",
+                      "fields": [],
+                      "items": null
+                    },
+                    {
+                      "name": "color",
+                      "type": "Nvarchar(max)",
+                      "fields": null,
+                      "items": null
+                    },
+                    {
+                      "name": "size",
+                      "type": "Nvarchar(max)",
+                      "fields": null,
+                      "items": null
+                    },
+                    {
+                      "name": "quantity",
+                      "type": "BigInt",
+                      "fields": null,
+                      "items": null
+                    },
+                    {
+                      "name": "price",
+                      "type": "Float",
+                      "fields": null,
+                      "items": null
+                    }
+                  ],
+                  "items": null
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "ManageFields",
+      "type": "ManageFields",
+      "inputNodes": [
+        {
+          "name": "ExpandItems"
+        }
+      ],
+      "properties": {
+        "columns": [
+          {
+            "type": "FunctionCall",
+            "properties": {
+              "functionName": "Json_Stringify",
+              "arguments": [
+                {
+                  "expressionType": "ColumnReference",
+                  "node": null,
+                  "columnName": "ArrayValue_items",
+                  "columnPathSegments": [
+                    {
+                      "field": "product_id"
+                    }
+                  ]
+                }
+              ]
+            },
+            "alias": "product_id"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "ArrayValue_items",
+                "columnPathSegments": [
+                  {
+                    "field": "color"
+                  }
+                ]
+              }
+            },
+            "alias": "color"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "ArrayValue_items",
+                "columnPathSegments": [
+                  {
+                    "field": "size"
+                  }
+                ]
+              }
+            },
+            "alias": "size"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "ArrayValue_items",
+                "columnPathSegments": [
+                  {
+                    "field": "quantity"
+                  }
+                ]
+              }
+            },
+            "alias": "quantity"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "ArrayValue_items",
+                "columnPathSegments": [
+                  {
+                    "field": "price"
+                  }
+                ]
+              }
+            },
+            "alias": "price"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "order_id",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "order_id"
+          },
+          {
+            "type": "Rename",
+            "properties": {
+              "column": {
+                "expressionType": "ColumnReference",
+                "node": null,
+                "columnName": "ArrayIndex_items",
+                "columnPathSegments": []
+              }
+            },
+            "alias": "item_index"
+          }
+        ]
+      },
+      "inputSchemas": [
+        {
+          "name": "ExpandItems",
+          "schema": {
+            "columns": [
+              {
+                "name": "ArrayIndex_items",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "ArrayValue_items",
+                "type": "Record",
+                "fields": [
+                  {
+                    "name": "product_id",
+                    "type": "Record",
+                    "fields": [],
+                    "items": null
+                  },
+                  {
+                    "name": "color",
+                    "type": "Nvarchar(max)",
+                    "fields": null,
+                    "items": null
+                  },
+                  {
+                    "name": "size",
+                    "type": "Nvarchar(max)",
+                    "fields": null,
+                    "items": null
+                  },
+                  {
+                    "name": "quantity",
+                    "type": "BigInt",
+                    "fields": null,
+                    "items": null
+                  },
+                  {
+                    "name": "price",
+                    "type": "Float",
+                    "fields": null,
+                    "items": null
+                  }
+                ],
+                "items": null
+              },
+              {
+                "name": "event_type",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "event_time",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "order_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "combination_id",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "user",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "is_community_created",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "promo_code",
+                "type": "Nvarchar(max)",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "discount",
+                "type": "BigInt",
+                "fields": null,
+                "items": null
+              },
+              {
+                "name": "total_price",
+                "type": "Float",
+                "fields": null,
+                "items": null
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "compatibilityLevel": "1.1"
+}

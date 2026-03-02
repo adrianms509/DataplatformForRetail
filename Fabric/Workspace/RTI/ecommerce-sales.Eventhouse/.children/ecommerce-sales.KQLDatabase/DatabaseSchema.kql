@@ -1,0 +1,8 @@
+// KQL script
+// Use management commands in this script to configure your database items, such as tables, functions, materialized views, and more.
+
+
+.create-merge table orders (event_time:datetime, order_id:string, combination_id:string, user:string, is_community_created:bool, promo_code:string, discount:real, total_price:real, items:dynamic) 
+.create-merge table combination_items (combination_id:string, item_index:int, product_id:string, color:string, size:string, quantity:int, price:real, product_name:string) 
+.create-merge table order_items (order_id:string, product_id:string, color:string, size:string, quantity:int, price:real, product_name:string) 
+.create-merge table combinations (event_time:datetime, combination_id:string, user_id:string, community_created:bool) 

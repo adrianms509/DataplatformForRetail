@@ -1,0 +1,22 @@
+table sales_promo_share_users
+	lineageTag: ebafb854-c7e3-4b4d-9ad0-f63e562723a5
+	sourceLineageTag: [dbo].[sales_promo_share_users]
+
+	column promo_share_users
+		dataType: double
+		lineageTag: 69bf7b88-b499-4499-a4be-2455740b973f
+		sourceLineageTag: promo_share_users
+		summarizeBy: sum
+		sourceColumn: promo_share_users
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales_promo_share_users = entity
+		mode: directLake
+		source
+			entityName: sales_promo_share_users
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Consume'
+

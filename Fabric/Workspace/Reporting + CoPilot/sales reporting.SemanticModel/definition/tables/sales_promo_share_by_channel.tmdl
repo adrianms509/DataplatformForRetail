@@ -1,0 +1,51 @@
+table sales_promo_share_by_channel
+	lineageTag: ba4a2133-f575-4355-8290-7978a4a14604
+	sourceLineageTag: [dbo].[sales_promo_share_by_channel]
+
+	column channel
+		dataType: string
+		lineageTag: ee22dd36-ac1f-4197-9563-27cb55b25da4
+		sourceLineageTag: channel
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders_with_promo
+		dataType: int64
+		formatString: 0
+		lineageTag: b6334360-1f0d-486a-b281-194ccb35dbf7
+		sourceLineageTag: orders_with_promo
+		summarizeBy: sum
+		sourceColumn: orders_with_promo
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders_total
+		dataType: int64
+		formatString: 0
+		lineageTag: 7e824589-44ae-41f3-9429-2ac57823375e
+		sourceLineageTag: orders_total
+		summarizeBy: sum
+		sourceColumn: orders_total
+
+		annotation SummarizationSetBy = Automatic
+
+	column promo_share_orders
+		dataType: double
+		lineageTag: bba80e14-0ee0-4010-b425-bacf6b364ad7
+		sourceLineageTag: promo_share_orders
+		summarizeBy: sum
+		sourceColumn: promo_share_orders
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales_promo_share_by_channel = entity
+		mode: directLake
+		source
+			entityName: sales_promo_share_by_channel
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Consume'
+

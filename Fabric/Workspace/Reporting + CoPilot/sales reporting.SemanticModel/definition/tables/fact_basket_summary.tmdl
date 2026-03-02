@@ -1,0 +1,145 @@
+table fact_basket_summary
+	lineageTag: 5d2422f6-9617-48e1-b419-e62d61e9ee48
+	sourceLineageTag: [dbo].[fact_basket_summary]
+
+	measure Orders =
+			
+			DISTINCTCOUNT ( fact_basket_summary[order_id] )
+		formatString: 0
+		lineageTag: 6479d1ea-a0ed-4908-b4e5-e121a95a98fc
+
+		changedProperty = Name
+
+	measure AOV =
+			
+			DIVIDE ( [Revenue], [Orders] )
+		lineageTag: dfec2eb4-38c4-41f8-8c78-cd242f6d6f50
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Promo Orders %' = ```
+			
+			DIVIDE (
+			    CALCULATE ( [Orders], fact_basket_summary[promo_flag] = TRUE() ),
+			    [Orders]
+			)
+			
+			```
+		lineageTag: d6185ecf-f03a-4fa3-b131-7423b99a93e0
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Promo Users %' =
+			
+			VAR UsersWithPromo =
+			    CALCULATE (
+			        DISTINCTCOUNT ( fact_basket_summary[user_id] ),
+			        fact_basket_summary[promo_flag] = TRUE()
+			    )
+			RETURN
+			DIVIDE ( UsersWithPromo, DISTINCTCOUNT ( fact_basket_summary[user_id] ) )
+		lineageTag: c004c7b5-991e-40d6-8858-79b8d3af9e1c
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column order_id
+		dataType: string
+		lineageTag: b776b02e-9d5c-4fcd-9b29-1559901d83de
+		sourceLineageTag: order_id
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 8bea32c6-6a60-4d0c-a31a-85cda5959f17
+		sourceLineageTag: order_date
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		lineageTag: f5e40508-35fd-4bb6-b0a9-2afa02e0b575
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column promo_flag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 7dabeed7-3841-482c-8997-df2921b9f5ab
+		sourceLineageTag: promo_flag
+		summarizeBy: none
+		sourceColumn: promo_flag
+
+		annotation SummarizationSetBy = Automatic
+
+	column basket_size
+		dataType: int64
+		formatString: 0
+		lineageTag: e5e6877d-c3dc-4a05-acc9-c96660c07c0a
+		sourceLineageTag: basket_size
+		summarizeBy: sum
+		sourceColumn: basket_size
+
+		annotation SummarizationSetBy = Automatic
+
+	column basket_qty
+		dataType: double
+		lineageTag: 0f0c38e2-958a-4452-b05e-9334c6e94a84
+		sourceLineageTag: basket_qty
+		summarizeBy: sum
+		sourceColumn: basket_qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column basket_value
+		dataType: double
+		lineageTag: b190af26-2056-4575-a1e7-97ad66a2ebc9
+		sourceLineageTag: basket_value
+		summarizeBy: sum
+		sourceColumn: basket_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column user_id
+		dataType: string
+		lineageTag: 51bdd7f1-bc4a-42e4-89a7-2af0b003711d
+		sourceLineageTag: user_id
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column promo_code
+		dataType: string
+		lineageTag: 32077247-b26a-45d3-afff-48bfc55927fc
+		sourceLineageTag: promo_code
+		summarizeBy: none
+		sourceColumn: promo_code
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_basket_summary = entity
+		mode: directLake
+		source
+			entityName: fact_basket_summary
+			schemaName: dbo
+			expressionSource: 'DirectLake - Silver_Model'
+

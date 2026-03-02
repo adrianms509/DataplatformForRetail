@@ -1,0 +1,22 @@
+table sales_aov_overall
+	lineageTag: c3b5d309-1c43-46c5-aca6-508c4c7856b1
+	sourceLineageTag: [dbo].[sales_aov_overall]
+
+	column aov
+		dataType: double
+		lineageTag: 1c460f47-1122-4ca6-a2f1-b824caccf5a9
+		sourceLineageTag: aov
+		summarizeBy: sum
+		sourceColumn: aov
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales_aov_overall = entity
+		mode: directLake
+		source
+			entityName: sales_aov_overall
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Consume'
+

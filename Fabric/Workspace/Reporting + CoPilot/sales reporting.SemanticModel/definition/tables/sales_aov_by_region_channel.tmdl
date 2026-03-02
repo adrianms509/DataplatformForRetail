@@ -1,0 +1,61 @@
+table sales_aov_by_region_channel
+	lineageTag: e0aab3a1-6cf5-4a4b-81d0-407b984a190b
+	sourceLineageTag: [dbo].[sales_aov_by_region_channel]
+
+	column region
+		dataType: string
+		lineageTag: 36dce91c-cf4e-4ec0-b5ab-7ac8c2cb9e14
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 6e2edc6a-40fb-4763-b102-39111b699f66
+		sourceLineageTag: channel
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 35136117-4ee3-47e2-b672-0a1ff7c8f685
+		sourceLineageTag: orders
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue
+		dataType: double
+		lineageTag: db8b7b3c-be1d-4ee6-9702-49bb717d2aa0
+		sourceLineageTag: revenue
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column aov
+		dataType: double
+		lineageTag: b55a7848-0fc1-4100-a6ce-324b5ce37705
+		sourceLineageTag: aov
+		summarizeBy: sum
+		sourceColumn: aov
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales_aov_by_region_channel = entity
+		mode: directLake
+		source
+			entityName: sales_aov_by_region_channel
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Consume'
+

@@ -1,0 +1,70 @@
+table sales_regional_split
+	lineageTag: bd11647f-514d-419d-b716-6acdab1c1313
+	sourceLineageTag: [dbo].[sales_regional_split]
+
+	column region
+		dataType: string
+		lineageTag: 6a701f39-df08-492a-8865-683363b2253e
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 7ef93e57-06a9-48a8-b050-00ed6c88ed85
+		sourceLineageTag: channel
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 2b269fc0-578b-407f-818c-701d8f291782
+		sourceLineageTag: brand
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 03606054-55b1-4257-8d58-e97b9009b21c
+		sourceLineageTag: orders
+		summarizeBy: sum
+		sourceColumn: orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column qty
+		dataType: double
+		lineageTag: e3db0372-4cda-43d1-9222-3abc87b6a94b
+		sourceLineageTag: qty
+		summarizeBy: sum
+		sourceColumn: qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue
+		dataType: double
+		lineageTag: 2d3414ac-465d-4913-89a9-f075cd172f9d
+		sourceLineageTag: revenue
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales_regional_split = entity
+		mode: directLake
+		source
+			entityName: sales_regional_split
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Consume'
+

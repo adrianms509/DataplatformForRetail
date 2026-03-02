@@ -1,0 +1,38 @@
+table dim_store
+	lineageTag: 111e0771-8bd3-4972-8e75-420049349568
+	sourceLineageTag: [dbo].[dim_store]
+
+	column store_id
+		dataType: string
+		lineageTag: 0a49221d-2115-41a4-93d8-0fb1c09b1870
+		sourceLineageTag: store_id
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column region
+		dataType: string
+		lineageTag: ffcae600-03fc-4895-a080-7393edc90bd9
+		sourceLineageTag: region
+		summarizeBy: none
+		sourceColumn: region
+
+		annotation SummarizationSetBy = Automatic
+
+	column channel
+		dataType: string
+		lineageTag: 60312e4b-43db-4ea1-a2eb-75f08f9d03bf
+		sourceLineageTag: channel
+		summarizeBy: none
+		sourceColumn: channel
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_store = entity
+		mode: directLake
+		source
+			entityName: dim_store
+			schemaName: dbo
+			expressionSource: 'DirectLake - Silver_Model'
+

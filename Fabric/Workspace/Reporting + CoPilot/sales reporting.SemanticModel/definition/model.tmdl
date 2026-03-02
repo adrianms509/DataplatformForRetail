@@ -1,0 +1,30 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["DirectLake - Silver_Model","DirectLake - Gold_Consume"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_ProTooling = ["DirectLakeOnOneLakeInWeb","WebModelingEdit","CopilotTooling"]
+
+ref table dim_store
+ref table dim_product
+ref table fact_sales_item
+ref table dim_date
+ref table fact_basket_summary
+ref table sales_promo_share_orders
+ref table sales_regional_split
+ref table sales_promo_share_users
+ref table sales_top_products_by_category
+ref table sales_promo_share_by_channel
+ref table sales_aov_by_brand
+ref table sales_aov_by_region_channel
+ref table sales_aov_overall
+
+ref cultureInfo en-US
+

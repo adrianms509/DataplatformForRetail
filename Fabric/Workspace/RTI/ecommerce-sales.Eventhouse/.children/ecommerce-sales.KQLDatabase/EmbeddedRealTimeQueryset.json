@@ -1,0 +1,82 @@
+{
+  "queryset": {
+    "version": "1.0.0",
+    "dataSources": [
+      {
+        "id": "18ed527b-e22b-4688-85b1-d558d5b877e9",
+        "clusterUri": "https://trd-916an0m3339je1qdrj.z2.kusto.fabric.microsoft.com",
+        "type": "Fabric",
+        "databaseItemId": "d85ecc7c-c97a-432a-9392-d75c1185b7a1",
+        "databaseItemName": "ecommerce-sales"
+      }
+    ],
+    "tabs": [
+      {
+        "id": "0c2f8388-d23b-4e65-b485-9c8e60c536f5",
+        "content": "//***********************************************************************************************************\n// Here are two articles to help you get started with KQL:\n// KQL reference guide - https://aka.ms/KQLguide\n// SQL - KQL conversions - https://aka.ms/sqlcheatsheet\n//***********************************************************************************************************\n\n// Use \"take\" to view a sample number of records in the table and check the data.\nYOUR_TABLE_HERE\n| take 100\n\n// See how many records are in the table.\nYOUR_TABLE_HERE\n| count\n\n// This query returns the number of ingestions per hour in the given table.\nYOUR_TABLE_HERE\n| summarize IngestionCount = count() by bin(ingestion_time(), 1h)\n\n",
+        "title": "Tab",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "4725df9e-654e-4e3c-b9b8-1e86668cd91d",
+        "content": ".create-or-alter table order_items ingestion json mapping \"OrderItemsMapping\"\n'['\n'  {\"column\":\"event_type\",           \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.event_type\"}},'\n'  {\"column\":\"event_time\",           \"datatype\":\"datetime\", \"Properties\":{\"Path\":\"$.event_time\"}},'\n'  {\"column\":\"order_id\",             \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.order_id\"}},'\n'  {\"column\":\"combination_id\",       \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.combination_id\"}},'\n'  {\"column\":\"user\",                 \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.user\"}},'\n'  {\"column\":\"is_community_created\", \"datatype\":\"bool\",     \"Properties\":{\"Path\":\"$.is_community_created\"}},'\n'  {\"column\":\"product_id\",           \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.product_id\"}},'\n'  {\"column\":\"color\",                \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.color\"}},'\n'  {\"column\":\"size\",                 \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.size\"}},'\n'  {\"column\":\"quantity\",             \"datatype\":\"int\",      \"Properties\":{\"Path\":\"$.quantity\"}},'\n'  {\"column\":\"price\",                \"datatype\":\"real\",     \"Properties\":{\"Path\":\"$.price\"}}'\n']'",
+        "title": "Setup Tables",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "40e02cd4-2a6d-461a-ac67-a0c222f7bcb1",
+        "content": ".create-or-alter table orders ingestion json mapping \"OrdersMapping\"\n'['\n'  { \"column\":\"event_type\",           \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.event_type\"}},'\n'  { \"column\":\"event_time\",           \"datatype\":\"datetime\", \"Properties\":{\"Path\":\"$.event_time\"}},'\n'  { \"column\":\"order_id\",             \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.order_id\"}},'\n'  { \"column\":\"combination_id\",       \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.combination_id\"}},'\n'  { \"column\":\"user\",                 \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.user\"}},'\n'  { \"column\":\"total_price\",          \"datatype\":\"real\",     \"Properties\":{\"Path\":\"$.total_price\"}},'\n'  { \"column\":\"promo_code\",           \"datatype\":\"string\",   \"Properties\":{\"Path\":\"$.promotions.promo_code\"}},'\n'  { \"column\":\"discount\",             \"datatype\":\"real\",     \"Properties\":{\"Path\":\"$.promotions.discount\"}},'\n'  { \"column\":\"is_community_created\", \"datatype\":\"bool\",     \"Properties\":{\"Path\":\"$.combination_meta.is_community_created\"}},'\n'  { \"column\":\"shipping_address\",     \"datatype\":\"dynamic\",  \"Properties\":{\"Path\":\"$.shipping_address\"}},'\n'  { \"column\":\"items\",                \"datatype\":\"dynamic\",  \"Properties\":{\"Path\":\"$.items\"}}'\n']'",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "7957aae8-f071-43cd-a75a-e87d1beca0f3",
+        "content": ".show table orders ingestion json mapping \"OrdersMapping\"\n",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "00926906-c808-49a3-af06-bb3bb465529c",
+        "content": ".create-or-alter table orders ingestion json mapping \"OrdersMapping\"\n'['\n'  { \"column\":\"event_type\", \"datatype\":\"string\",  \"Properties\":{ \"Path\":\"$.event_type\" }},'\n'  { \"column\":\"event_time\", \"datatype\":\"datetime\",\"Properties\":{ \"Path\":\"$.event_time\" }},'\n'  { \"column\":\"order_id\",   \"datatype\":\"string\",  \"Properties\":{ \"Path\":\"$.order.order_id\" }},'\n'  { \"column\":\"combination_id\",\"datatype\":\"string\",\"Properties\":{ \"Path\":\"$.order.combination_id\" }},'\n'  { \"column\":\"user\",       \"datatype\":\"string\",  \"Properties\":{ \"Path\":\"$.order.user\" }},'\n'  { \"column\":\"total_price\",\"datatype\":\"real\",    \"Properties\":{ \"Path\":\"$.order.total_price\" }},'\n'  { \"column\":\"promo_code\", \"datatype\":\"string\",  \"Properties\":{ \"Path\":\"$.order.promotions.promo_code\" }},'\n'  { \"column\":\"discount\",   \"datatype\":\"real\",    \"Properties\":{ \"Path\":\"$.order.promotions.discount\" }},'\n'  { \"column\":\"is_community_created\",\"datatype\":\"bool\",\"Properties\":{ \"Path\":\"$.combination_meta.is_community_created\" }},'\n'  { \"column\":\"shipping_address\",\"datatype\":\"dynamic\",\"Properties\":{ \"Path\":\"$.order.shipping_address\" }},'\n'  { \"column\":\"items\",      \"datatype\":\"dynamic\", \"Properties\":{ \"Path\":\"$.order.items\" }}'\n']'",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "8fcd2796-06f7-49e3-a528-d2a749a1f9c9",
+        "content": "orders\n| order by event_time desc\n| take 100",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "7e8f66a8-7791-4937-bd20-b735e2235a15",
+        "content": ".create-or-alter table orders ingestion json mapping \"OrdersMapping\"\n'['\n'  { \"column\" : \"event_time\",           \"datatype\" : \"datetime\", \"Properties\": { \"Path\":\"$.event_time\" } },'\n'  { \"column\" : \"event_type\",           \"datatype\" : \"string\",   \"Properties\": { \"Path\":\"$.event_type\" } },'\n'  { \"column\" : \"order_id\",             \"datatype\" : \"string\",   \"Properties\": { \"Path\":\"$.order_id\" } },'\n'  { \"column\" : \"combination_id\",       \"datatype\" : \"string\",   \"Properties\": { \"Path\":\"$.combination_id\" } },'\n'  { \"column\" : \"user\",                 \"datatype\" : \"string\",   \"Properties\": { \"Path\":\"$.user\" } },'\n'  { \"column\" : \"items\",                \"datatype\" : \"dynamic\",  \"Properties\": { \"Path\":\"$.items\" } },'\n'  { \"column\" : \"promotions\",           \"datatype\" : \"dynamic\",  \"Properties\": { \"Path\":\"$.promotions\" } },'\n'  { \"column\" : \"total_price\",          \"datatype\" : \"real\",     \"Properties\": { \"Path\":\"$.total_price\" } },'\n'  { \"column\" : \"shipping_address\",     \"datatype\" : \"dynamic\",  \"Properties\": { \"Path\":\"$.shipping_address\" } },'\n'  { \"column\" : \"is_community_created\", \"datatype\" : \"bool\",     \"Properties\": { \"Path\":\"$.is_community_created\" } }'\n']'",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "62d85960-88d4-4d40-82e7-52cc86680811",
+        "content": ".create table orders (\n    event_time: datetime,\n    order_id: string,\n    combination_id: string,\n    user_id: string,\n    community_created: bool,\n    promo_code: string,\n    discount: real,\n    total_price: real,\n    items: dynamic\n)\n\n\n\n\n.create-or-alter table orders ingestion json mapping \"orders_mapping\"\n'['\n'  { \"column\":\"event_time\", \"datatype\":\"datetime\", \"Properties\":{\"Path\":\"$.event_time\"} },'\n'  { \"column\":\"order_id\", \"datatype\":\"string\", \"Properties\":{\"Path\":\"$.order_id\"} },'\n'  { \"column\":\"combination_id\", \"datatype\":\"string\", \"Properties\":{\"Path\":\"$.combination_id\"} },'\n'  { \"column\":\"user_id\", \"datatype\":\"string\", \"Properties\":{\"Path\":\"$.user\"} },'\n'  { \"column\":\"community_created\", \"datatype\":\"bool\", \"Properties\":{\"Path\":\"$.is_community_created\"} },'\n'  { \"column\":\"promo_code\", \"datatype\":\"string\", \"Properties\":{\"Path\":\"$.promo_code\"} },'\n'  { \"column\":\"discount\", \"datatype\":\"real\", \"Properties\":{\"Path\":\"$.discount\"} },'\n'  { \"column\":\"total_price\", \"datatype\":\"real\", \"Properties\":{\"Path\":\"$.total_price\"} },'\n'  { \"column\":\"items\", \"datatype\":\"dynamic\", \"Properties\":{\"Path\":\"$.items\"} }'\n']'",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "612ac749-7fa6-4a96-afd1-848bd76ae7d0",
+        "content": ".show table orders ingestion json mapping \"orders_mapping\"\n",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "04a3453a-9a3e-4c8e-bca1-e29696f46ac2",
+        "content": ".create-or-alter table orders ingestion json mapping \"orders_mapping\"\n'['\n'  { \"column\":\"event_time\", \"properties\": { \"path\":\"$.event_time\" } },'\n'  { \"column\":\"order_id\", \"properties\": { \"path\":\"$.order_id\" } },'\n'  { \"column\":\"combination_id\", \"properties\": { \"path\":\"$.combination_id\" } },'\n'  { \"column\":\"user_id\", \"properties\": { \"path\":\"$.user\" } },'\n'  { \"column\":\"community_created\", \"properties\": { \"path\":\"$.community_created\" } },'\n'  { \"column\":\"promo_code\", \"properties\": { \"path\":\"$.promo_code\" } },'\n'  { \"column\":\"discount\", \"properties\": { \"path\":\"$.discount\" } },'\n'  { \"column\":\"total_price\", \"properties\": { \"path\":\"$.total_price\" } },'\n'  { \"column\":\"items\", \"properties\": { \"path\":\"$.items\" } }'\n']'",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      },
+      {
+        "id": "5f894ddd-30bf-4c7a-b56c-5e409705b596",
+        "content": ".create-or table Orders\n(\n    ArrayIndex_items:int,\n    ArrayValue_items:string,\n    event_time:datetime,\n    order_id:string,\n    combination_id:string,\n    ['user']:string,\n    is_community_created:bool,\n    promo_code:string,\n    discount:decimal,\n    total_price:decimal\n)",
+        "title": "",
+        "dataSourceId": "18ed527b-e22b-4688-85b1-d558d5b877e9"
+      }
+    ]
+  }
+}

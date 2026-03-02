@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "KQLDatabase",
+    "displayName": "ecommerce-sales",
+    "description": "ecommerce-sales"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "1185b7a1-d75c-9392-432a-c97ad85ecc7c"
+  }
+}

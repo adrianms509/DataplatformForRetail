@@ -1,0 +1,31 @@
+table sales_aov_by_brand
+	lineageTag: 933d40ab-79c6-445b-89f4-9f4ad3fbdcbd
+	sourceLineageTag: [dbo].[sales_aov_by_brand]
+
+	column brand
+		dataType: string
+		lineageTag: f56ee3d1-4592-436e-b612-ff3fb897f149
+		sourceLineageTag: brand
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column aov_brand
+		dataType: double
+		lineageTag: e1c2cd07-e631-4478-916d-31e36106e796
+		sourceLineageTag: aov_brand
+		summarizeBy: sum
+		sourceColumn: aov_brand
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition sales_aov_by_brand = entity
+		mode: directLake
+		source
+			entityName: sales_aov_by_brand
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Consume'
+

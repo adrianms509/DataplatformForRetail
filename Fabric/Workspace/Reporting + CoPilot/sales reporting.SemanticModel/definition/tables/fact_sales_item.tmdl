@@ -1,0 +1,100 @@
+table fact_sales_item
+	lineageTag: 22dc89db-1ef8-4fb9-90a5-103c9654af8d
+	sourceLineageTag: [dbo].[fact_sales_item]
+
+	measure Revenue =
+			
+			SUM ( fact_sales_item[line_value] )
+		lineageTag: f78f84c6-667f-48ae-a9cd-a9af296e0aa5
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Units Sold' = ```
+			
+			SUM ( fact_sales_item[qty] )
+			
+			```
+		lineageTag: d0ca620a-571c-44e0-a1a2-b17ac7e9ebb4
+
+		changedProperty = Name
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column order_id
+		dataType: string
+		lineageTag: 4050d965-5684-4e0f-a04c-500ef0cd87e2
+		sourceLineageTag: order_id
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 73e7389d-ab79-4019-834d-5280f8a6d4f0
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column qty
+		dataType: double
+		lineageTag: efe5c9b9-e8e6-4efc-a9dd-23609d861a50
+		sourceLineageTag: qty
+		summarizeBy: sum
+		sourceColumn: qty
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column unit_price
+		dataType: double
+		lineageTag: a369b85e-f957-45ba-8188-ac83b971d7f5
+		sourceLineageTag: unit_price
+		summarizeBy: sum
+		sourceColumn: unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column line_value
+		dataType: double
+		lineageTag: 4443f136-2782-4b93-b54f-def61cfa5460
+		sourceLineageTag: line_value
+		summarizeBy: sum
+		sourceColumn: line_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column category
+		dataType: string
+		lineageTag: 04f577d9-8b77-47a9-8efc-9855b80d8120
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: e0a7816d-6a35-4adc-8586-65626169c675
+		sourceLineageTag: brand
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_sales_item = entity
+		mode: directLake
+		source
+			entityName: fact_sales_item
+			schemaName: dbo
+			expressionSource: 'DirectLake - Silver_Model'
+

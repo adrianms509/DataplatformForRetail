@@ -1,0 +1,79 @@
+table sales_top_products_by_category
+	lineageTag: 5cbece54-dfb0-4ba4-99e1-66b4444aa8f5
+	sourceLineageTag: [dbo].[sales_top_products_by_category]
+
+	column product_id
+		dataType: string
+		lineageTag: bb352da1-f7ca-45e9-8444-61e9530d1561
+		sourceLineageTag: product_id
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: d2bc69cb-5129-4664-8a88-08b7d740c491
+		sourceLineageTag: product_name
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 0f618257-b6a1-4b8a-9c84-d366ac41b9a9
+		sourceLineageTag: category
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 35751bea-7a65-4d95-9161-3b381a02424e
+		sourceLineageTag: brand
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column qty_sold
+		dataType: double
+		lineageTag: 23b8c0bf-4ac6-4326-b99c-bf501f99bebc
+		sourceLineageTag: qty_sold
+		summarizeBy: sum
+		sourceColumn: qty_sold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column revenue
+		dataType: double
+		lineageTag: cba30944-5c6b-4df3-903d-8a0eff179eef
+		sourceLineageTag: revenue
+		summarizeBy: sum
+		sourceColumn: revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rank_in_category
+		dataType: int64
+		formatString: 0
+		lineageTag: 1a76eb25-5f03-4480-895d-bb7889c724ec
+		sourceLineageTag: rank_in_category
+		summarizeBy: sum
+		sourceColumn: rank_in_category
+
+		annotation SummarizationSetBy = Automatic
+
+	partition sales_top_products_by_category = entity
+		mode: directLake
+		source
+			entityName: sales_top_products_by_category
+			schemaName: dbo
+			expressionSource: 'DirectLake - Gold_Consume'
+

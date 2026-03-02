@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/fewShots/1.0.0/schema.json",
+  "fewShots": [
+    {
+      "id": "06ab338f-9892-4aac-a7df-355fcde7d250",
+      "question": "How many Jackets 05 are in stock in Cologne?",
+      "query": "WITH p AS (\r\n  SELECT product_id\r\n  FROM [Bronze_Ingest].[dbo].[products]\r\n  WHERE LOWER([name]) = LOWER('Jackets 05')\r\n)\r\nSELECT\r\n  pi.product_id,\r\n  SUM(pi.amount) AS total_stock_cologne\r\nFROM [Bronze_Ingest].[dbo].[product_inventory] AS pi\r\nJOIN p ON p.product_id = pi.product_id\r\nWHERE pi.location = 'Cologne'\r\nGROUP BY pi.product_id;"
+    },
+    {
+      "id": "1049b6df-6ef1-434c-b09b-5e02cd9cac98",
+      "question": "What’s the color and material of Tshirts 03?",
+      "query": "SELECT\r\n  product_id,\r\n  [name],\r\n  color,\r\n  material\r\nFROM [Bronze_Ingest].[dbo].[products]\r\nWHERE LOWER([name]) = LOWER('Tshirts 03');"
+    }
+  ]
+}
