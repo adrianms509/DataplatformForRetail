@@ -8,7 +8,7 @@
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #fff;
-    color: #1a1a1a;
+    color: #117865;
     line-height: 1.5;
 }
 
@@ -21,7 +21,7 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    background: #1a1a1a;
+    background: #117865;
     color: #fff;
     padding: 1rem 1.5rem;
     border-radius: 12px;
@@ -65,7 +65,7 @@ body {
     border-bottom: 1px solid #333;
     position: sticky;
     top: 0;
-    background: #1a1a1a;
+    background: #117865;
     z-index: 100;
 }
 
@@ -158,7 +158,7 @@ body {
 }
 
 .product-card.selected {
-    outline: 3px solid #1a1a1a;
+    outline: 3px solid #117865;
 }
 
 /* Drag and Drop styles */
@@ -197,7 +197,7 @@ body {
     position: absolute;
     top: 0.75rem;
     left: 0.75rem;
-    background: #1a1a1a;
+    background: #117865;
     color: #fff;
     padding: 0.25rem 0.5rem;
     font-size: 0.75rem;
@@ -310,7 +310,7 @@ body {
 
 .selection-section.drop-zone-active {
     background-color: rgba(0, 0, 0, 0.03);
-    border-left: 2px dashed #1a1a1a;
+    border-left: 2px dashed #117865;
 }
 
 .selection-section:has(.selected-item) {
@@ -353,7 +353,7 @@ body {
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
-    background: #1a1a1a;
+    background: #117865;
     color: #fff;
     padding: 0.2rem 0.4rem;
     font-size: 0.7rem;
@@ -365,7 +365,7 @@ body {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    background: #1a1a1a;
+    background: #117865;
     color: #fff;
     border: none;
     width: 28px;
@@ -443,7 +443,7 @@ body {
 .btn-generate {
     width: 100%;
     padding: 1rem 2rem;
-    background: #1a1a1a;
+    background: #117865;
     color: #fff;
     border: none;
     font-size: 1rem;
@@ -494,7 +494,7 @@ body {
     padding: 1rem 2rem;
     border-bottom: none;
     flex-shrink: 0;
-    background: #1a1a1a;
+    background: #117865;
 }
 
 .modal-title {
@@ -565,7 +565,7 @@ body {
 }
 
 .look-item-delivery strong {
-    color: #1a1a1a;
+    color: #117865;
 }
 
 .look-item-price {
@@ -602,7 +602,7 @@ body {
 }
 
 .btn-add-item {
-    background: #1a1a1a;
+    background: #117865;
     color: #fff;
     border: none;
     width: 44px;
@@ -634,7 +634,7 @@ body {
     flex: 1;
     max-width: 300px;
     padding: 1rem 2rem;
-    background: #1a1a1a;
+    background: #117865;
     color: #fff;
     border: none;
     font-size: 0.9rem;
@@ -654,7 +654,7 @@ body {
     max-width: 300px;
     padding: 1rem 2rem;
     background: #fff;
-    color: #1a1a1a;
+    color: #117865;
     border: 1px solid #e5e5e5;
     font-size: 0.9rem;
     font-weight: 500;
@@ -667,7 +667,7 @@ body {
 }
 
 .btn-secondary:hover {
-    border-color: #1a1a1a;
+    border-color: #117865;
 }
 
 .btn-icon {
@@ -705,7 +705,7 @@ body {
     width: 48px;
     height: 48px;
     border: 3px solid #e5e5e5;
-    border-top-color: #1a1a1a;
+    border-top-color: #117865;
     border-radius: 50%;
     animation: spin 1s linear infinite;
     margin-bottom: 1rem;
@@ -763,7 +763,7 @@ body {
 
 .cart-modal .modal-header {
     position: relative;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #117865 0%, #2d2d2d 100%);
     padding: 1.25rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -984,7 +984,7 @@ body {
 .cart-item-name {
     font-weight: 500;
     font-size: 0.9rem;
-    color: #1a1a1a;
+    color: #117865;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1017,7 +1017,7 @@ body {
 .cart-item-price {
     font-weight: 700;
     font-size: 0.95rem;
-    color: #1a1a1a;
+    color: #117865;
     white-space: nowrap;
 }
 
@@ -1038,7 +1038,7 @@ body {
 
 .cart-look-subtotal-price {
     font-weight: 700;
-    color: #1a1a1a;
+    color: #117865;
 }
 
 .cart-footer {
@@ -1066,7 +1066,7 @@ body {
 .cart-total-price {
     font-size: 1.75rem;
     font-weight: 800;
-    color: #1a1a1a;
+    color: #117865;
     letter-spacing: -0.5px;
 }
 
@@ -1099,7 +1099,7 @@ body {
 .cart-actions .btn-primary {
     flex: 1;
     max-width: 200px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    background: linear-gradient(135deg, #117865 0%, #333 100%);
     border: none;
     color: #fff;
     font-weight: 600;
@@ -1307,7 +1307,7 @@ body {
 .checkout-success h2 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #117865;
     margin-bottom: 0.25rem;
 }
 
@@ -1339,7 +1339,7 @@ body {
 .checkout-right h3 {
     font-size: 1rem;
     font-weight: 600;
-    color: #1a1a1a;
+    color: #117865;
     margin-bottom: 1rem;
 }
 
@@ -1399,7 +1399,7 @@ body {
 .checkout-summary-price {
     font-weight: 700;
     font-size: 0.95rem;
-    color: #1a1a1a;
+    color: #117865;
 }
 
 .checkout-details {
@@ -1424,7 +1424,7 @@ body {
     padding-top: 1rem;
     font-weight: 700;
     font-size: 1.1rem;
-    color: #1a1a1a;
+    color: #117865;
 }
 
 .free-shipping {
@@ -1463,7 +1463,7 @@ body {
 .shipping-date {
     font-weight: 600;
     font-size: 0.95rem;
-    color: #1a1a1a;
+    color: #117865;
 }
 
 .checkout-info {
@@ -1496,7 +1496,7 @@ body {
     padding: 1rem 2rem;
     font-size: 1rem;
     border-radius: 12px;
-    background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+    background: linear-gradient(135deg, #117865 0%, #333 100%);
     border: none;
     color: #fff;
     font-weight: 600;
