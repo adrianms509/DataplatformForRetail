@@ -2,9 +2,9 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/fewShots/1.0.0/schema.json",
   "fewShots": [
     {
-      "id": "fc426b99-1df1-4746-9434-ee71b51b26cb",
-      "question": "What do customers typically buy with Shoes 12?",
-      "query": "-- DB: Gold_Consume\r\nSELECT\r\n  pa.rhs_item_id,\r\n  pa.lift,\r\n  pa.confidence_lhs_to_rhs AS confidence,\r\n  pa.pair_cnt\r\nFROM [Gold_Consume].[dbo].[fact_product_affinity_topk] AS pa\r\nWHERE pa.lhs_item_id = 'Shoes 12'\r\nORDER BY\r\n  pa.lift DESC,\r\n  pa.confidence_lhs_to_rhs DESC,\r\n  pa.pair_cnt DESC;"
+      "id": "7195bff7-b3f9-4a4e-beb3-fbb7c5e7abfa",
+      "question": "What do customers typically buy with Product P0023?",
+      "query": "\r\nSELECT\r\n  pa.rhs_item_id,\r\n  pa.rhs_name,\r\n  pa.lift,\r\n  pa.confidence_lhs_to_rhs AS confidence,\r\n  pa.pair_cnt\r\nFROM dbo.product_affinity_topk_named AS pa\r\nWHERE pa.lhs_item_id = 'P0023'\r\nORDER BY\r\n  pa.lift DESC,\r\n  pa.confidence_lhs_to_rhs DESC,\r\n  pa.pair_cnt DESC;"
     }
   ]
 }

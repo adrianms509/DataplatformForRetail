@@ -2,28 +2,28 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/dataAgent/definition/dataSource/1.0.0/schema.json",
   "artifactId": "2d865a64-85a7-94af-4333-4dbb5f6bb600",
   "workspaceId": "00000000-0000-0000-0000-000000000000",
-  "dataSourceInstructions": "Gold_consume Instructions\r\n\r\nFrequently Bought Together / Recommendations\r\n\r\n- Resolve the product anchor using product_id or a case-insensitive\r\n  lookup on Bronze_Ingest.products.name.\r\n\r\nPrimary Source:\r\n- Use Gold_consume.fact_product_affinity_topk for recommendations.\r\n\r\nFallback:\r\n- If Top‑K has no rows for the anchor, use fact_product_affinity with:\r\n    • pair_cnt ≥ 5 noise filter\r\n    • limit to Top‑10 based on ranking\r\n\r\nRanking:\r\n- Order results by:\r\n    1) lift DESC\r\n    2) confidence_lhs_to_rhs DESC\r\n    3) pair_cnt DESC\r\n\r\nQuality Thresholds:\r\n- Prefer recommendations where:\r\n    • lift ≥ 1.5\r\n    • confidence_lhs_to_rhs ≥ 0.15\r\n  If none meet thresholds, return best available and state limited evidence.\r\n\r\nProduct Name Resolution:\r\n- Join rhs_item_id to Bronze_Ingest.products for human-readable names.\r\n\r\nEdge Handling:\r\n- If no associations exist: return\r\n  “Not enough historical data for this product yet.”",
+  "dataSourceInstructions": "Primary Source (Recommendations):\r\n- Use dbo.product_affinity_topk_named (already includes product names; no joins required).\r\n\r\nFallback (only if the view has no rows for the anchor):\r\n- Use dbo.fact_product_affinity with pair_cnt ≥ 5\r\n- Return Top-10 ordered by lift DESC, confidence_lhs_to_rhs DESC, pair_cnt DESC\r\n\r\nImportant:\r\n- Do NOT join to Bronze_Ingest.products for recommendations (names are already present in dbo.product_affinity_topk_named).",
   "displayName": "Gold_Consume",
   "type": "lakehouse_tables",
-  "userDescription": "Gold_consume.fact_product_affinity_topk\r\nPurpose: Precomputed Top‑K “frequently bought together” associations for fast recommendations.\r\nColumns:\r\n\r\nlhs_item_id STRING\r\nrhs_item_id STRING\r\npair_cnt BIGINT\r\nsupport_lhs DOUBLE\r\nsupport_rhs DOUBLE\r\nsupport_pair DOUBLE\r\nconfidence_lhs_to_rhs DOUBLE\r\nlift DOUBLE\r\n\r\n\r\n\r\nGold_consume.fact_product_affinity\r\nPurpose: Full association table (used as fallback when Top‑K has no coverage).\r\nColumns:\r\n\r\nlhs_item_id STRING\r\nrhs_item_id STRING\r\npair_cnt BIGINT\r\nsupport_lhs DOUBLE\r\nsupport_rhs DOUBLE\r\nsupport_pair DOUBLE\r\nconfidence_lhs_to_rhs DOUBLE\r\nlift DOUBLE",
+  "userDescription": "Gold_consume.fact_product_affinity_topk_named\r\nPurpose: Precomputed Top‑K “frequently bought together” associations for fast recommendations.\r\nColumns:\r\n\r\nlhs_item_id STRING\r\nlhs_name STRING\r\nrhs_item_id STRING\r\nrhs_name STRING\r\npair_cnt BIGINT\r\nsupport_pair DOUBLE\r\nconfidence_lhs_to_rhs DOUBLE\r\nlift DOUBLE\r\nrefreshed_at TIMESTAMP\r\n\r\nGold_consume.fact_product_affinity\r\nPurpose: Full association table (used as fallback when Top‑K has no coverage).\r\nColumns:\r\n\r\nlhs_item_id STRING\r\nrhs_item_id STRING\r\npair_cnt BIGINT\r\nsupport_lhs DOUBLE\r\nsupport_rhs DOUBLE\r\nsupport_pair DOUBLE\r\nconfidence_lhs_to_rhs DOUBLE\r\nlift DOUBLE",
   "metadata": {},
   "elements": [
     {
-      "id": "e5a6bebc-e5d7-43b1-8c46-14c6c8a9c23f",
+      "id": "2380d871-01d2-41d5-8cb1-1c2bae0d03c8",
       "is_selected": false,
       "display_name": "dbo",
       "type": "lakehouse_tables.schema",
       "description": null,
       "children": [
         {
-          "id": "dfac5bc3-da75-45fc-9402-f4a232ebc7e3",
+          "id": "3adf386d-39cc-4fd3-8206-4e9326ce0716",
           "is_selected": true,
           "display_name": "fact_product_affinity",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "a1819b96-5b43-43de-8db4-8dcc39fd8104",
+              "id": "d8603288-a444-4861-bfba-150ba7138a6e",
               "is_selected": true,
               "display_name": "confidence_lhs_to_rhs",
               "type": "lakehouse_tables.column",
@@ -32,7 +32,7 @@
               "children": []
             },
             {
-              "id": "2f263915-d301-46c5-b2ea-4e2b5b6a5553",
+              "id": "bfb14453-df34-42f8-8727-93da0e49da28",
               "is_selected": true,
               "display_name": "lhs_cnt",
               "type": "lakehouse_tables.column",
@@ -41,7 +41,7 @@
               "children": []
             },
             {
-              "id": "edb11ac4-3cc7-4d9d-a02c-f66e585f262d",
+              "id": "b9366593-5a8f-4e8a-b0bd-a215a384d12d",
               "is_selected": true,
               "display_name": "lhs_item_id",
               "type": "lakehouse_tables.column",
@@ -50,7 +50,7 @@
               "children": []
             },
             {
-              "id": "0a111902-e04f-44c9-9ca7-285294ff98c4",
+              "id": "ae491b73-6294-4ac8-a3ee-52608311c9c3",
               "is_selected": true,
               "display_name": "lift",
               "type": "lakehouse_tables.column",
@@ -59,7 +59,7 @@
               "children": []
             },
             {
-              "id": "0fcc7f6e-05fa-4aee-b9b7-660c092852bf",
+              "id": "94b39e82-c1ad-4e53-8dc1-4ece21913023",
               "is_selected": true,
               "display_name": "pair_cnt",
               "type": "lakehouse_tables.column",
@@ -68,7 +68,7 @@
               "children": []
             },
             {
-              "id": "a76424a0-b406-494b-9e82-4f3e1ebfdcb2",
+              "id": "899691ec-e789-4952-9d78-dbfcfcc8f236",
               "is_selected": true,
               "display_name": "refreshed_at",
               "type": "lakehouse_tables.column",
@@ -77,7 +77,7 @@
               "children": []
             },
             {
-              "id": "2e1f8ded-5954-47af-b881-2c718156f6eb",
+              "id": "f9942a09-a11b-408d-9edd-ed493331e23c",
               "is_selected": true,
               "display_name": "rhs_cnt",
               "type": "lakehouse_tables.column",
@@ -86,7 +86,7 @@
               "children": []
             },
             {
-              "id": "2402e849-602e-4246-9231-5c3d6b4f8fa8",
+              "id": "a6b82cc9-4ea5-4139-a3fd-65857fc5633d",
               "is_selected": true,
               "display_name": "rhs_item_id",
               "type": "lakehouse_tables.column",
@@ -95,7 +95,7 @@
               "children": []
             },
             {
-              "id": "9ade0650-b691-47a6-9655-233f8bb1fbe1",
+              "id": "0303bdb5-a90e-4434-ba6c-d2182f3c6fae",
               "is_selected": true,
               "display_name": "support_lhs",
               "type": "lakehouse_tables.column",
@@ -104,7 +104,7 @@
               "children": []
             },
             {
-              "id": "cc8c0837-e5e5-414d-aaa0-a2727fa68b07",
+              "id": "c4ad22c0-03aa-47b6-917e-3fa47180b3f6",
               "is_selected": true,
               "display_name": "support_pair",
               "type": "lakehouse_tables.column",
@@ -113,7 +113,7 @@
               "children": []
             },
             {
-              "id": "d56fbd74-b2d8-4cbb-808a-bf6c9f058576",
+              "id": "0b25c68a-c3d1-4b8e-b68c-c7e5a738564f",
               "is_selected": true,
               "display_name": "support_rhs",
               "type": "lakehouse_tables.column",
@@ -124,14 +124,14 @@
           ]
         },
         {
-          "id": "e58f9306-667d-466d-a832-532867125c14",
-          "is_selected": true,
+          "id": "bb697af6-d9db-4437-9ce2-74f5d100170b",
+          "is_selected": false,
           "display_name": "fact_product_affinity_topk",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "35f62666-735e-4f76-80b4-1e6a8c9e8826",
+              "id": "530e65b2-5207-4a17-9b33-71ab1a7d3e3e",
               "is_selected": true,
               "display_name": "confidence_lhs_to_rhs",
               "type": "lakehouse_tables.column",
@@ -140,7 +140,7 @@
               "children": []
             },
             {
-              "id": "f3b9507d-ab6c-41ab-b9b0-6a4b2b6a816c",
+              "id": "80f859b5-2d83-4f80-a7d0-97cfd3d38e62",
               "is_selected": true,
               "display_name": "lhs_cnt",
               "type": "lakehouse_tables.column",
@@ -149,7 +149,7 @@
               "children": []
             },
             {
-              "id": "60ffdfa4-18df-4c2d-9855-7d757090f2f4",
+              "id": "1682db26-2fd8-4c63-89e0-c7212a3defa5",
               "is_selected": true,
               "display_name": "lhs_item_id",
               "type": "lakehouse_tables.column",
@@ -158,7 +158,7 @@
               "children": []
             },
             {
-              "id": "9ca0f078-fa65-423c-9715-7064c238daf6",
+              "id": "1fe09f16-48a2-49c1-990b-dcb0b6435115",
               "is_selected": true,
               "display_name": "lift",
               "type": "lakehouse_tables.column",
@@ -167,7 +167,7 @@
               "children": []
             },
             {
-              "id": "c54de4ef-4542-453a-960e-41f8758f31a9",
+              "id": "d43d3977-85ad-4115-9e45-ea790639a2d3",
               "is_selected": true,
               "display_name": "pair_cnt",
               "type": "lakehouse_tables.column",
@@ -176,7 +176,7 @@
               "children": []
             },
             {
-              "id": "a24b415c-1530-4ce8-861e-653c51c954ec",
+              "id": "1720b35b-501a-4267-bbd9-cb5c5c32af3e",
               "is_selected": true,
               "display_name": "refreshed_at",
               "type": "lakehouse_tables.column",
@@ -185,7 +185,7 @@
               "children": []
             },
             {
-              "id": "a36ffe30-71f9-46f6-95eb-4726866354cd",
+              "id": "c4cccec4-84d4-4d54-a399-f7297a68293c",
               "is_selected": true,
               "display_name": "rhs_cnt",
               "type": "lakehouse_tables.column",
@@ -194,7 +194,7 @@
               "children": []
             },
             {
-              "id": "f02392f3-f505-47ea-b44c-ea14bcc936ab",
+              "id": "0df46685-448b-43fa-bd2e-159554ce113a",
               "is_selected": true,
               "display_name": "rhs_item_id",
               "type": "lakehouse_tables.column",
@@ -203,7 +203,7 @@
               "children": []
             },
             {
-              "id": "a8a7749f-ccd3-43c5-b758-399b2d1decc8",
+              "id": "b76c9368-fe58-44cf-bde7-9d3cc2616e50",
               "is_selected": true,
               "display_name": "support_lhs",
               "type": "lakehouse_tables.column",
@@ -212,7 +212,7 @@
               "children": []
             },
             {
-              "id": "cc0c0608-83bd-486e-a70d-4bec6e651bec",
+              "id": "3955031c-73e3-40d5-a269-7a4dca545ba0",
               "is_selected": true,
               "display_name": "support_pair",
               "type": "lakehouse_tables.column",
@@ -221,7 +221,7 @@
               "children": []
             },
             {
-              "id": "809aaf61-ec00-4a41-8969-89a670e807f5",
+              "id": "c2882aba-db22-4f5c-a9e1-3326a5def0bd",
               "is_selected": true,
               "display_name": "support_rhs",
               "type": "lakehouse_tables.column",
@@ -232,14 +232,14 @@
           ]
         },
         {
-          "id": "e15d0649-d443-4e97-a0f0-7c46030efbb8",
-          "is_selected": false,
+          "id": "904196b5-a3d6-4db9-a093-2fad35908b2e",
+          "is_selected": true,
           "display_name": "product_affinity_topk_named",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "c7759197-2a57-4022-bab9-93cbd5438ce7",
+              "id": "53541ce4-1766-4129-961e-422848fdae80",
               "is_selected": true,
               "display_name": "confidence_lhs_to_rhs",
               "type": "lakehouse_tables.column",
@@ -248,7 +248,7 @@
               "children": []
             },
             {
-              "id": "c8aa2f0b-681a-4289-87a7-264285ab1e73",
+              "id": "64df06eb-a5e0-46ba-9b50-0a39aaa1ccb9",
               "is_selected": true,
               "display_name": "lhs_item_id",
               "type": "lakehouse_tables.column",
@@ -257,7 +257,7 @@
               "children": []
             },
             {
-              "id": "caac8ac6-b6da-4ad5-b41a-144afaa47d1c",
+              "id": "54895691-5704-48cc-a989-4f181849053d",
               "is_selected": true,
               "display_name": "lhs_name",
               "type": "lakehouse_tables.column",
@@ -266,7 +266,7 @@
               "children": []
             },
             {
-              "id": "7369da0c-e3e0-4b65-93a6-b3ec2d53b59d",
+              "id": "271d8544-53bf-4113-8d4b-f315a1041e49",
               "is_selected": true,
               "display_name": "lift",
               "type": "lakehouse_tables.column",
@@ -275,7 +275,7 @@
               "children": []
             },
             {
-              "id": "41e0c706-0903-46a2-9dcf-3a785db13f2d",
+              "id": "76edd8e7-1fb0-4883-a7d1-889795ebd25e",
               "is_selected": true,
               "display_name": "pair_cnt",
               "type": "lakehouse_tables.column",
@@ -284,7 +284,7 @@
               "children": []
             },
             {
-              "id": "6aa9c11d-4a7b-4c8d-898b-e5cf30daf08d",
+              "id": "e2390a62-72f2-4a00-bdaf-98a971bc5e49",
               "is_selected": true,
               "display_name": "refreshed_at",
               "type": "lakehouse_tables.column",
@@ -293,7 +293,7 @@
               "children": []
             },
             {
-              "id": "78942498-80c7-4021-ad8f-a1604f0dabf4",
+              "id": "c32cc53f-a630-4007-b59c-7b63983fc89f",
               "is_selected": true,
               "display_name": "rhs_item_id",
               "type": "lakehouse_tables.column",
@@ -302,7 +302,7 @@
               "children": []
             },
             {
-              "id": "37a68fca-0178-4994-80fc-408114cb1b33",
+              "id": "a157e814-639c-44f9-8d06-b43d240d5a17",
               "is_selected": true,
               "display_name": "rhs_name",
               "type": "lakehouse_tables.column",
@@ -311,7 +311,7 @@
               "children": []
             },
             {
-              "id": "3590179c-9610-4bf2-be5f-db26934178f2",
+              "id": "b334e381-e72c-48bb-8ecc-dc7cc174ff16",
               "is_selected": true,
               "display_name": "support_pair",
               "type": "lakehouse_tables.column",
@@ -322,14 +322,14 @@
           ]
         },
         {
-          "id": "8c937a24-2c99-462e-b1fb-03a1ba8970e3",
+          "id": "d395313a-4699-4002-b2ef-37ed75eb9b74",
           "is_selected": false,
           "display_name": "sales_aov_by_brand",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "73233e28-9069-4e53-87b1-e2f07a3b3273",
+              "id": "aa32fdb5-8c95-487e-9412-c1090da0f9a7",
               "is_selected": true,
               "display_name": "aov_brand",
               "type": "lakehouse_tables.column",
@@ -338,7 +338,7 @@
               "children": []
             },
             {
-              "id": "408bd67d-20f8-44d2-a588-2942f5e385e0",
+              "id": "f4f2b266-d410-46c2-b76d-f0de9e854282",
               "is_selected": true,
               "display_name": "brand",
               "type": "lakehouse_tables.column",
@@ -349,14 +349,14 @@
           ]
         },
         {
-          "id": "e5e71bd0-7dcf-4fec-a226-8579076c8d07",
+          "id": "80df9196-5326-44d9-b1b6-822e0b434765",
           "is_selected": false,
           "display_name": "sales_aov_by_region_channel",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "52f645e6-08bb-4cb5-9f50-a194f4a0a4d3",
+              "id": "c5a32bd0-3c03-433c-a261-bf886f9bf5aa",
               "is_selected": true,
               "display_name": "aov",
               "type": "lakehouse_tables.column",
@@ -365,7 +365,7 @@
               "children": []
             },
             {
-              "id": "79859687-4137-4cab-9d98-581e9f6528ec",
+              "id": "d6dca0c8-7472-4d1a-aee6-5a34622afef0",
               "is_selected": true,
               "display_name": "channel",
               "type": "lakehouse_tables.column",
@@ -374,7 +374,7 @@
               "children": []
             },
             {
-              "id": "c07db24d-c959-43ab-9f48-6b29a08bb1fb",
+              "id": "0e909416-6ace-45a7-ba28-18d28809b111",
               "is_selected": true,
               "display_name": "orders",
               "type": "lakehouse_tables.column",
@@ -383,7 +383,7 @@
               "children": []
             },
             {
-              "id": "67829d83-57aa-4232-a08a-44153307c188",
+              "id": "77cfe782-c82c-4a79-bc22-542c237ad1f5",
               "is_selected": true,
               "display_name": "region",
               "type": "lakehouse_tables.column",
@@ -392,7 +392,7 @@
               "children": []
             },
             {
-              "id": "e28f45ce-b696-4ec2-884c-89af29ddadd4",
+              "id": "c8539f8b-1c8e-4464-9821-0317775d28d6",
               "is_selected": true,
               "display_name": "revenue",
               "type": "lakehouse_tables.column",
@@ -403,14 +403,14 @@
           ]
         },
         {
-          "id": "4c8d3846-2ec0-40b3-b37b-49677d878d1b",
+          "id": "8de332a7-278e-4356-8ee3-7d844afd8770",
           "is_selected": false,
           "display_name": "sales_aov_overall",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "46bb4de0-71d5-46d6-a6e7-27fdfc490a78",
+              "id": "bf7d735e-0dae-48b0-b2b4-7a48e22d8ded",
               "is_selected": true,
               "display_name": "aov",
               "type": "lakehouse_tables.column",
@@ -421,14 +421,14 @@
           ]
         },
         {
-          "id": "a1a52ef0-0dee-45c7-9daa-f52c05c6c17e",
+          "id": "d912a657-77a9-4d4b-ad82-082f8543a87f",
           "is_selected": false,
           "display_name": "sales_promo_share_by_channel",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "ee798352-5791-4126-9d99-6b310333cc37",
+              "id": "d64446e4-72b7-4534-94e6-884b9d29839a",
               "is_selected": true,
               "display_name": "channel",
               "type": "lakehouse_tables.column",
@@ -437,7 +437,7 @@
               "children": []
             },
             {
-              "id": "c2dd1ef9-acd9-40fd-b072-02b1304cbafb",
+              "id": "cc260a44-cd8f-47a1-96c4-3aaf99660e66",
               "is_selected": true,
               "display_name": "orders_total",
               "type": "lakehouse_tables.column",
@@ -446,7 +446,7 @@
               "children": []
             },
             {
-              "id": "20fba975-abc3-405d-b037-83459d9376b4",
+              "id": "a1c5e3a7-a679-4190-a4c4-bc76171e51ff",
               "is_selected": true,
               "display_name": "orders_with_promo",
               "type": "lakehouse_tables.column",
@@ -455,7 +455,7 @@
               "children": []
             },
             {
-              "id": "e727d9c6-9918-4654-915d-759f1d8702b7",
+              "id": "1e982ff8-8aae-4aa8-b694-f4ebfbfebe58",
               "is_selected": true,
               "display_name": "promo_share_orders",
               "type": "lakehouse_tables.column",
@@ -466,14 +466,14 @@
           ]
         },
         {
-          "id": "a10f52d3-0581-4705-83fa-a57ea07a67ee",
+          "id": "1e50ff10-b4eb-4d1c-9170-fa889eedd8ff",
           "is_selected": false,
           "display_name": "sales_promo_share_orders",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "82c81673-a624-4ff6-98f8-7378ba305e01",
+              "id": "9bb386ae-a41a-4970-bab4-204647cb7752",
               "is_selected": true,
               "display_name": "promo_share_orders",
               "type": "lakehouse_tables.column",
@@ -484,14 +484,14 @@
           ]
         },
         {
-          "id": "af23d186-349c-4d5a-a409-0617e408c55e",
+          "id": "53a81c6e-0a33-4a02-90d2-3c12ed01ecfe",
           "is_selected": false,
           "display_name": "sales_promo_share_users",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "6c1e6193-48af-44b4-8a48-bdf68decd389",
+              "id": "18eba08c-7ec6-400a-8d9a-793b7ad5f048",
               "is_selected": true,
               "display_name": "promo_share_users",
               "type": "lakehouse_tables.column",
@@ -502,14 +502,14 @@
           ]
         },
         {
-          "id": "5b6c3e52-3847-42da-847c-e5a0f71b6e1f",
+          "id": "5b30aa20-8e2e-4ec6-b7cc-558dc490f488",
           "is_selected": false,
           "display_name": "sales_regional_split",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "10e8622d-603b-4d30-a8b0-559f56b84926",
+              "id": "21128255-d6df-47b9-b6fc-d2db176144e1",
               "is_selected": true,
               "display_name": "brand",
               "type": "lakehouse_tables.column",
@@ -518,7 +518,7 @@
               "children": []
             },
             {
-              "id": "0f6c8e48-32e0-47fb-8b2e-8da7352121e5",
+              "id": "05619d7c-fd7e-40ad-8a0e-917166155c3b",
               "is_selected": true,
               "display_name": "channel",
               "type": "lakehouse_tables.column",
@@ -527,7 +527,7 @@
               "children": []
             },
             {
-              "id": "98900fee-e0a8-41c0-bcf0-7f9b8e924eda",
+              "id": "175ac779-8b06-40be-ad00-552b2fc6973a",
               "is_selected": true,
               "display_name": "orders",
               "type": "lakehouse_tables.column",
@@ -536,7 +536,7 @@
               "children": []
             },
             {
-              "id": "681ab313-37c2-4976-956e-0d59c3f7e824",
+              "id": "ece13653-ee20-4046-9726-8ed13be0f763",
               "is_selected": true,
               "display_name": "qty",
               "type": "lakehouse_tables.column",
@@ -545,7 +545,7 @@
               "children": []
             },
             {
-              "id": "fceee7b8-25d5-48ec-95e5-781621353b11",
+              "id": "cbec7824-a624-4e98-8f81-9be88fc1c8a6",
               "is_selected": true,
               "display_name": "region",
               "type": "lakehouse_tables.column",
@@ -554,7 +554,7 @@
               "children": []
             },
             {
-              "id": "4c50b6b8-daf0-4f71-ba17-f12b0e47dca7",
+              "id": "72ae3357-b730-458c-85ff-c66bd98c6d35",
               "is_selected": true,
               "display_name": "revenue",
               "type": "lakehouse_tables.column",
@@ -565,14 +565,14 @@
           ]
         },
         {
-          "id": "c8c36f9f-5a93-4475-bf72-838c26541419",
+          "id": "1ef376ad-bc29-4aec-a9cb-353bb643168d",
           "is_selected": false,
           "display_name": "sales_top_products_by_category",
           "type": "lakehouse_tables.table",
           "description": null,
           "children": [
             {
-              "id": "fb673320-fb5f-41a0-85e5-fd4f822c1045",
+              "id": "6f54bc9d-4b79-49be-b38e-663f9b174cae",
               "is_selected": true,
               "display_name": "brand",
               "type": "lakehouse_tables.column",
@@ -581,7 +581,7 @@
               "children": []
             },
             {
-              "id": "e533e48a-c671-42b0-8d07-2421c545f33b",
+              "id": "cdc0a6b6-3dbf-40b2-9cad-83eddfc25246",
               "is_selected": true,
               "display_name": "category",
               "type": "lakehouse_tables.column",
@@ -590,7 +590,7 @@
               "children": []
             },
             {
-              "id": "7cd64505-119a-400c-b17b-1b568f61f05b",
+              "id": "8385bca1-945c-4944-907f-171a9cdd1869",
               "is_selected": true,
               "display_name": "product_id",
               "type": "lakehouse_tables.column",
@@ -599,7 +599,7 @@
               "children": []
             },
             {
-              "id": "04cecd1d-a9b5-4c30-ae24-af9f21aecab3",
+              "id": "55a7c2e6-7eb9-4748-897c-2f5dfef02749",
               "is_selected": true,
               "display_name": "product_name",
               "type": "lakehouse_tables.column",
@@ -608,7 +608,7 @@
               "children": []
             },
             {
-              "id": "37c0818a-d17b-4ee8-a7d2-8b646bdf541c",
+              "id": "1a002d11-793a-4304-b3d4-23a52c4c52a7",
               "is_selected": true,
               "display_name": "qty_sold",
               "type": "lakehouse_tables.column",
@@ -617,7 +617,7 @@
               "children": []
             },
             {
-              "id": "300b0875-88d0-4604-9564-53cbb17d1f66",
+              "id": "7c2d9165-e5da-4147-9f7a-74a211bce1fe",
               "is_selected": true,
               "display_name": "rank_in_category",
               "type": "lakehouse_tables.column",
@@ -626,7 +626,7 @@
               "children": []
             },
             {
-              "id": "c0004f65-b8c4-41f6-8119-988fa8dbb808",
+              "id": "9fb5c811-df02-4be1-9918-586a1a967143",
               "is_selected": true,
               "display_name": "revenue",
               "type": "lakehouse_tables.column",
